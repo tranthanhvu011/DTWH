@@ -1,0 +1,43 @@
+2024-10-30 21:02:01,071 INFO sqlalchemy.engine.Engine SELECT DATABASE()
+2024-10-30 21:02:01,071 INFO sqlalchemy.engine.Engine [raw sql] {}
+2024-10-30 21:02:01,072 INFO sqlalchemy.engine.Engine SELECT @@sql_mode
+2024-10-30 21:02:01,072 INFO sqlalchemy.engine.Engine [raw sql] {}
+2024-10-30 21:02:01,072 INFO sqlalchemy.engine.Engine SELECT @@lower_case_table_names
+2024-10-30 21:02:01,072 INFO sqlalchemy.engine.Engine [raw sql] {}
+2024-10-30 21:02:01,073 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2024-10-30 21:02:01,073 INFO sqlalchemy.engine.Engine DESCRIBE `dtwh`.`logs`
+2024-10-30 21:02:01,073 INFO sqlalchemy.engine.Engine [raw sql] {}
+2024-10-30 21:02:01,078 INFO sqlalchemy.engine.Engine COMMIT
+2024-10-30 21:02:01,078 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2024-10-30 21:02:01,079 INFO sqlalchemy.engine.Engine INSERT INTO logs (timestamp, action, details, status) VALUES (%(timestamp)s, %(action)s, %(details)s, %(status)s)
+2024-10-30 21:02:01,079 INFO sqlalchemy.engine.Engine [generated in 0.00009s] {'timestamp': '2024-10-30 21:02:01', 'action': 'Start Crawl', 'details': 'Bắt đầu crawl vào lúc 2024-10-30 21:02:01', 'status': 'Success'}
+2024-10-30 21:02:01,080 INFO sqlalchemy.engine.Engine COMMIT
+Log entry added: Start Crawl - Bắt đầu crawl vào lúc 2024-10-30 21:02:01 - Success
+Sản phẩm 'Laptop gaming HP Victus 16 r0215TX 9Q9B8PA' đã tồn tại. Bỏ qua.
+Sản phẩm 'Laptop gaming HP Victus 16 s0142AX 9Q989PA' đã tồn tại. Bỏ qua.
+Sản phẩm 'Laptop gaming HP VICTUS 16-r0230TX 9Q981PA' đã tồn tại. Bỏ qua.
+Sản phẩm 'Laptop gaming HP VICTUS 16-r0226TX 9Q977PA' đã tồn tại. Bỏ qua.
+Sản phẩm 'Laptop gaming HP VICTUS 16-r0127TX 8C5N2PA' đã tồn tại. Bỏ qua.
+Sản phẩm 'Laptop gaming HP VICTUS 16-s0078AX 8C5N7PA' đã tồn tại. Bỏ qua.
+Sản phẩm 'Laptop gaming HP OMEN 16 wf0129TX 8W943PA' đã tồn tại. Bỏ qua.
+2024-10-30 21:03:20,881 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2024-10-30 21:03:20,882 INFO sqlalchemy.engine.Engine INSERT INTO logs (timestamp, action, details, status) VALUES (%(timestamp)s, %(action)s, %(details)s, %(status)s)
+2024-10-30 21:03:20,882 INFO sqlalchemy.engine.Engine [cached since 79.8s ago] {'timestamp': '2024-10-30 21:03:20', 'action': 'Add Products', 'details': 'Không có sản phẩm mới.', 'status': 'Info'}
+2024-10-30 21:03:20,883 INFO sqlalchemy.engine.Engine COMMIT
+Log entry added: Add Products - Không có sản phẩm mới. - Info
+2024-10-30 21:03:20,884 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2024-10-30 21:03:20,884 INFO sqlalchemy.engine.Engine INSERT INTO logs (timestamp, action, details, status) VALUES (%(timestamp)s, %(action)s, %(details)s, %(status)s)
+2024-10-30 21:03:20,884 INFO sqlalchemy.engine.Engine [cached since 79.8s ago] {'timestamp': '2024-10-30 21:03:20', 'action': 'End Crawl', 'details': 'Kết thúc crawl vào lúc 2024-10-30 21:03:20', 'status': 'Success'}
+2024-10-30 21:03:20,885 INFO sqlalchemy.engine.Engine COMMIT
+Log entry added: End Crawl - Kết thúc crawl vào lúc 2024-10-30 21:03:20 - Success
+2024-10-30 21:03:20,887 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2024-10-30 21:03:20,887 INFO sqlalchemy.engine.Engine INSERT INTO logs (timestamp, action, details, status) VALUES (%(timestamp)s, %(action)s, %(details)s, %(status)s)
+2024-10-30 21:03:20,887 INFO sqlalchemy.engine.Engine [cached since 79.81s ago] {'timestamp': '2024-10-30 21:03:20', 'action': 'Summary', 'details': 'Tổng số sản phẩm crawl được: 7', 'status': 'Success'}
+2024-10-30 21:03:20,887 INFO sqlalchemy.engine.Engine COMMIT
+Log entry added: Summary - Tổng số sản phẩm crawl được: 7 - Success
+2024-10-30 21:03:20,888 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2024-10-30 21:03:20,888 INFO sqlalchemy.engine.Engine INSERT INTO logs (timestamp, action, details, status) VALUES (%(timestamp)s, %(action)s, %(details)s, %(status)s)
+2024-10-30 21:03:20,888 INFO sqlalchemy.engine.Engine [cached since 79.81s ago] {'timestamp': '2024-10-30 21:03:20', 'action': 'Summary', 'details': 'Tổng số sản phẩm mới thêm vào: 0', 'status': 'Success'}
+2024-10-30 21:03:20,889 INFO sqlalchemy.engine.Engine COMMIT
+Log entry added: Summary - Tổng số sản phẩm mới thêm vào: 0 - Success
+Data saved to CSV files and log saved to MySQL successfully.
