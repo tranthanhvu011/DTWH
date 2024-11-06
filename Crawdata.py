@@ -8,19 +8,17 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
-
-# Kết nối tới cơ sở dữ liệu
+import signal
+import sys
 engine = create_engine('mysql+pymysql://root:@localhost/dtwh?charset=utf8mb4', echo=True)
 Session = sessionmaker(bind=engine)
 metadata = MetaData()
 
-# Định nghĩa bảng config với dữ liệu JSON
 config_table = Table('config', metadata,
                      Column('id', Integer, primary_key=True, autoincrement=True),
                      Column('data', Text)
                      )
 
-# Định nghĩa bảng logs với cột config_id
 logs_table = Table('logs', metadata,
                    Column('id', Integer, primary_key=True, autoincrement=True),
                    Column('config_id', Integer),
@@ -30,10 +28,16 @@ logs_table = Table('logs', metadata,
                    Column('status', String(50))
                    )
 
-# Tạo bảng nếu chưa tồn tại
 metadata.create_all(engine)
+def handle_termination_signal(signal_number, frame):
+    end_time = time.strftime('%Y-%m-%d %H:%M:%S')
+    write_log_to_sql("End Crawl", f"Kết thúc crawl bất thường vào lúc {end_time}", "Failed")
+    driver.quit()
+    print("Crawl bị dừng đột ngột.")
+    sys.exit(1)
 
-# Hàm lấy cấu hình từ bảng config
+signal.signal(signal.SIGINT, handle_termination_signal)  # Ngắt bằng Ctrl+C
+signal.signal(signal.SIGTERM, handle_termination_signal)  # Ngắt từ hệ thống (kill command)
 def get_config_data():
     with engine.connect() as conn:
         result = conn.execute(config_table.select()).mappings().fetchone()
@@ -42,18 +46,15 @@ def get_config_data():
         else:
             raise ValueError("Không tìm thấy cấu hình trong bảng config.")
 
-# Đọc cấu hình từ bảng config
 config = get_config_data()
 
-# Thiết lập kết nối MySQL với cấu hình từ config
 db_connection = config['db_connection']
 engine = create_engine(db_connection, echo=True)
 
-# Hàm ghi log vào MySQL
 def write_log_to_sql(action, details, status="Success"):
     try:
         timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
-        config_id = 1  # Giả sử cấu hình hiện tại có ID là 1 (cập nhật nếu cần)
+        config_id = 1
         new_log = logs_table.insert().values(config_id=config_id, timestamp=timestamp, action=action, details=details, status=status)
         with engine.begin() as conn:
             conn.execute(new_log)
@@ -61,7 +62,6 @@ def write_log_to_sql(action, details, status="Success"):
     except Exception as e:
         print(f"Lỗi khi ghi log vào MySQL: {e}")
 
-# Hàm làm sạch giá trị giá tiền
 def clean_price(price_str):
     if price_str:
         price_str = price_str.replace('₫', '').replace('.', '').replace(',', '.')
@@ -71,7 +71,6 @@ def clean_price(price_str):
             return None
     return None
 
-# Hàm làm sạch phần trăm giảm giá
 def clean_discount(discount_str):
     if discount_str:
         discount_str = discount_str.replace('%', '')
@@ -81,7 +80,6 @@ def clean_discount(discount_str):
             return None
     return None
 
-# Đường dẫn thư mục và các file CSV từ cấu hình
 data_dir = config['data_dir']
 if not os.path.exists(data_dir):
     os.makedirs(data_dir)
@@ -90,7 +88,6 @@ products_csv = os.path.join(data_dir, config['file_product'])
 specifications_csv = os.path.join(data_dir, config['file_specifications'])
 images_csv = os.path.join(data_dir, config['file_image'])
 
-# Kiểm tra xem sản phẩm đã tồn tại trong file CSV chưa
 def product_exists(product_name):
     if not os.path.exists(products_csv):
         return None
@@ -98,10 +95,9 @@ def product_exists(product_name):
         reader = csv.DictReader(file)
         for row in reader:
             if row['product_name'] == product_name:
-                return int(row['id'])  # Trả về ID của sản phẩm nếu tồn tại
+                return int(row['id'])
     return None
 
-# Set up the webdriver
 chrome_options = Options()
 chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--disable-dev-shm-usage')
@@ -112,40 +108,32 @@ service = Service(config['chromedriver_path'])
 driver = webdriver.Chrome(service=service, options=chrome_options)
 
 try:
-    # Ghi log thời gian bắt đầu
     start_time = time.strftime('%Y-%m-%d %H:%M:%S')
     write_log_to_sql("Start Crawl", f"Bắt đầu crawl vào lúc {start_time}")
 
-    # Mở trang danh mục sản phẩm
     category_url = config['category_url']
     driver.get(category_url)
     time.sleep(5)
 
-    # Lấy các liên kết sản phẩm
     product_elements = driver.find_elements(By.CSS_SELECTOR, '.proloop .proloop-name a')
     product_links = [product.get_attribute('href') for product in product_elements]
 
-    # Lists to store data for each table
     products_list = []
     specifications_list = []
     images_list = []
     new_products = 0
 
-    # Duyệt qua từng sản phẩm
     for product_link in product_links:
         driver.get(product_link)
         time.sleep(3)
 
-        # Lấy tên sản phẩm
         product_name = driver.find_element(By.CSS_SELECTOR, '.product-name h1').text
 
-        # Kiểm tra xem sản phẩm đã tồn tại
         product_id = product_exists(product_name)
         if product_id:
             print(f"Sản phẩm '{product_name}' đã tồn tại. Bỏ qua.")
             continue
 
-        # Get product price
         try:
             price = driver.find_element(By.CSS_SELECTOR, '.product-price .pro-price').text
             price = clean_price(price)
@@ -162,18 +150,15 @@ try:
         except:
             discount_percent = None
 
-        # Get thumbnail image
         try:
             thumb_image = driver.find_element(By.CSS_SELECTOR, '.img-default').get_attribute('src')
         except:
             thumb_image = None
 
-        # Append product info to products list
         product_id = len(products_list) + 1  # Tạo ID sản phẩm mới
         products_list.append([product_id, product_name, price, discounted_price, discount_percent, thumb_image])
         new_products += 1
 
-        # Get specifications data
         try:
             specs_table = driver.find_element(By.ID, 'tblGeneralAttribute')
             specs_rows = specs_table.find_elements(By.TAG_NAME, 'tr')
@@ -186,7 +171,6 @@ try:
         except:
             pass
 
-        # Get detailed images
         try:
             detail_image_elements = driver.find_elements(By.CSS_SELECTOR, '.product-gallery--photo a')
             for detail_image_element in detail_image_elements:
@@ -196,17 +180,14 @@ try:
             pass
 
 except Exception as e:
-    # Ghi log khi có lỗi trong quá trình crawl
     print(f"Lỗi trong quá trình crawl: {e}")
     write_log_to_sql("Crawl Failed", f"Lỗi trong quá trình crawl: {e}", "Failed")
 
 finally:
-    # Đảm bảo rằng quá trình luôn kết thúc và ghi log thời gian kết thúc
     end_time = time.strftime('%Y-%m-%d %H:%M:%S')
     write_log_to_sql("End Crawl", f"Kết thúc crawl vào lúc {end_time}")
-    driver.quit()  # Đóng trình duyệt sau khi hoàn tất
+    driver.quit()
 
-    # Append new products to CSV if there are any
     if products_list:
         with open(products_csv, mode='a', newline='', encoding='utf-8') as product_file:
             product_writer = csv.writer(product_file)
@@ -231,7 +212,6 @@ finally:
     else:
         write_log_to_sql("Add Products", "Không có sản phẩm mới.", "Info")
 
-# Tổng kết số lượng sản phẩm
 write_log_to_sql("Summary", f"Tổng số sản phẩm crawl được: {len(product_links)}")
 write_log_to_sql("Summary", f"Tổng số sản phẩm mới thêm vào: {new_products}")
 
