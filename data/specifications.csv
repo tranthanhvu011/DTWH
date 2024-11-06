@@ -1,0 +1,1080 @@
+product_id,spec_name,spec_value
+1,CPU,"AMD Ryzen™ AI 9 HX 370 Processor 2.0GHz (36MB Cache, up to 5.1GHz, 12 cores, 24 Threads); AMD XDNA™ NPU up to 50TOPS"
+1,RAM,32GB (16x2) Onboard LPDDR5X 7467MHz (Không nâng cấp được)
+1,Ổ lưu trữ,"1TB PCIe® 4.0 NVMe™ M.2 SSD (2 slots, support M.2 2280 PCIe 4.0x4, nâng cấp tối đa 2TB)"
+1,Card đồ họa,"NVIDIA® GeForce RTX™ 4070 Laptop GPU (321 AI TOPs)
+ROG Boost: 1655MHz* at 105W (1605MHz Boost Clock+50MHz OC, 85W+20W Dynamic Boost)"
+1,Màn hình,"16-inch 2.5K (2560 x 1600, WQXGA) 16:10 OLED, 240Hz, 0.2ms, 500 nits, 100% DCI-P3, Glossy display, G-Sync / Adaptive-Sync, ROG Nebula Display"
+1,Cổng giao tiếp,"1x Type C USB 4 support DisplayPort™ / power delivery
+1x USB 3.2 Gen 2 Type-C support DisplayPort™ / power delivery
+2x USB 3.2 Gen 2 Type-A
+1x card reader (SD Card) (SD Express 7.0)
+1x HDMI 2.1 FRL
+1x 3.5mm Combo Audio Jack"
+1,Bàn phím,"Backlit Chiclet Keyboard 1-Zone RGB
+With Copilot key"
+1,Audio,"4-speaker (dual force woofer) system with Smart Amplifier Technology, 2 Tweeters"
+1,Đọc thẻ nhớ,"Card reader (SD) (UHS-II, 312MB/s)"
+1,LAN,N/A
+1,,
+1,,
+1,,
+1,,
+1,,
+1,,
+1,,
+1,,
+1,,
+2,CPU,Intel Core i5-1335U 1.3GHz up to 4.6GHz 12MB
+2,RAM,"16GB (2x8GB) DDR4 3200MHz (2x SO-DIMM socket, up to 32GB SDRAM)"
+2,Ổ cứng,512GB NVMe PCIe Gen4 SSD (1 x slots M.2 NVMe PCIe Gen4)
+2,Card đồ họa,Intel Iris Xe Graphics
+2,Màn hình,"15.6"" FHD (1920 x 1080) IPS-Level, 60Hz, 45% NTSC, Thin Bezel, 65% sRGB"
+2,Cổng giao tiếp,"1x Type-C (USB3.2 Gen2 / DisplayPort™/ Power Delivery 3.0)
+3x Type-A USB3.2 Gen1
+1x Micro SD Card Reader
+1x HDMI™ (4K @ 30Hz)
+1x RJ45
+1x Mic-in/Headphone-out Combo Jack"
+2,Bàn phím,Single Backlit Keyboard (White)
+2,Audio,2x 2W Audio Speaker
+2,LAN,Gigabit Ethernet
+2,Wifi + Bluetooth,"802.11 ax Wi-Fi 6E, Bluetooth v5.3"
+2,Webcam,HD type (30fps@720p)
+2,Bảo mật,"Fingerprint Security, Discrete Trusted Platform Module(dTPM) 2.0, Firmware Trusted Platform Module(fTPM) 2.0, Webcam Shutter, Kensington Lock"
+2,Pin,3 Cell 46.8 WHr
+2,,
+2,,
+2,,
+2,,
+3,CPU,Intel Core i5-13420H 2.1GHz up to 4.6GHz 12MB
+3,RAM,"16GB (2 x 8GB) DDR4 3200MHz (2x SO-DIMM socket, up to 64GB SDRAM)"
+3,Ổ cứng,"512GB NVMe PCIe SSD Gen3x4 (Còn trống 1x 2.5"" SATA HDD slot)"
+3,VGA,"NVIDIA® GeForce RTX™ 2050 4GB UUp to 1170MHz Boost Clock 45W Maximum Graphics Power with Dynamic Boost.
+AI TOPs: 104 TOPs"
+3,Màn hình,"15.6"" FHD (1920 x 1080), 144Hz, IPS-Level, 45% NTSC, 65% sRGB"
+3,Cổng giao tiếp,"1x Type-C (USB3.2 Gen1 / DP)
+3x Type-A USB3.2 Gen1
+1x HDMI™ (4K @ 30Hz)
+1x RJ45
+1x Mic-in/Headphone-out Combo Jack"
+3,Bàn phím,Single Backlit Keyboard (Blue)
+3,Audio,2x 2W Speaker
+3,Chuẩn LAN,Gigabit Ethernet
+3,Chuẩn WIFI,802.11 ax Wi-Fi 6E
+3,Bluetooth,v5.3
+3,Webcam,HD type (30fps@720p)
+3,Hệ điều hành,Windows 11 Home
+3,,
+3,,
+3,,
+3,,
+4,CPU,"Intel® Core™ Ultra 7 Processor 155H 1.4 GHz (24MB Cache, up to 4.8 GHz, 16 cores, 22 Threads); Intel® AI Boost NPU"
+4,RAM,"32GB (16x2) DDR5 5600MHz (2x SO-DIMM socket, up to 32GB SDRAM)"
+4,Ổ cứng,1TB NVMe PCIe Gen4x4 SSD (1 x slots M.2 NVMe PCIe Gen4)
+4,Card đồ họa,"NVIDIA® GeForce RTX™ 4050 6GB GDDR6 powers advanced AI with 194 AI TOPS
+Up to 1605MHz Boost Clock 45W Maximum Graphics Power with Dynamic Boost."
+4,Màn hình,"14"" 2.8K (2880 x 1800), IPS-Level, 100% DCI-P3(Typical)"
+4,Cổng giao tiếp,"1x Type-A USB3.2 Gen2
+1x Type-C (USB3.2 Gen2 / DisplayPort™/ Power Delivery 3.0)
+1x Thunderbolt™ 4 (DisplayPort™/ Power Delivery 3.1)
+1x Mic-in/Headphone-out Combo Jac
+1x HDMI™ 2.1 (8K @ 60Hz / 4K @ 120Hz)"
+4,Bàn phím,Single Backlit Keyboard (White) with Copilot Key
+4,Audio,"2x 2W Audio Speaker
+Hi-Res Audio Ready, DTS Audio Processing
+Spatial Array Microphone (3 Mic)"
+4,LAN,Gigabit Ethernet
+4,Wifi + Bluetooth,"Intel® Killer™ Wi-Fi 7 BE1750, Bluetooth v5.4"
+4,Webcam,"IR FHD type (30fps@1080p) with HDR
+3D Noise Reduction+ (3DNR+)"
+4,,
+4,,
+4,,
+4,,
+4,,
+4,,
+11,CPU,"Intel® Core™ Ultra 7 Processor 258V 32GB 1.8 GHz (12MB Cache, up to 4.8 GHz, 8 cores, 8 Threads); Intel® AI Boost NPU"
+11,RAM,32GB LPDDR5 onboard (Không nâng cấp)
+11,Ổ cứng,1TB M.2 NVMe™ PCIe® 4.0 SSD
+11,Card màn hình,"Intel® Arc™ Graphics
+Intel AI Boost NPU lên đến 47 TOPs, tổng hiệu năng AI lên đến 120 TOPS"
+11,Màn hình,"14"" 3K (2880 x 1800) OLED 16:10 120Hz, 500nits HDR, 100% DCI-P3, PANTONE Validated, Glossy display, 70% less harmful blue light, TÜV Rheinland-certified"
+11,Cổng kết nối,"1x USB 3.2 Gen 2 Type-A (tốc độ dữ liệu lên đến 10Gbps)
+2x Thunderbolt™ 4 với hỗ trợ hiển thị / cấp nguồn (tốc độ dữ liệu lên đến 40Gbps)
+1x HDMI 2.1 TMDS
+1x 3.5mm Combo Audio Jack"
+11,Bàn phím,"Bàn phím đèn nền Chiclet
+Phím Copilot"
+11,Webcam,"FHD, Camera IR hỗ trợ Windows Hello"
+11,Audio,Harman/Kardon (Premium)
+11,Kết nối không dây,Wi-Fi 7(802.11be) (Tri-band)2*2 + Bluetooth® 5.4 Wireless Card
+11,Hệ điều hành,Windows 11 Home + Office Home & Student 2021
+11,Pin,"72WHrs, 2S2P, 4-cell Li-ion"
+11,,
+11,,
+11,,
+11,,
+12,CPU,"AMD Ryzen™ 7 6800H (3.2 GHz upto 4.7 GHz, 8 nhân 16 luồng, L2 Cache: 4MB, L3 Cache: 16MB)"
+12,Ram,"16GB (2x8GB) DDR5 4800MHz (2x SO-DIMM socket, up to 32GB SDRAM)"
+12,Ổ cứng,"512GB PCIe NVMe SED SSD (Còn trống 1 khe SSD M.2 PCIE, nâng cấp tối đa 2TB)"
+12,Card đồ họa,NVIDIA® GeForce RTX™ 3060 with 6 GB of dedicated GDDR6 VRAM
+12,Màn hình,"15.6"" FHD (1920 x 1080) IPS 165Hz SlimBezel, 100% sRGB, Acer ComfyViewTM LED-backlit TFT LCD"
+12,Cổng giao tiếp," 2 x USB 3.2 Gen 2 ports with one featuring power-off USB charging
+1 x USB 3.2 Gen 1 port
+1 x USB Type-C™ port: USB 3.2 Gen 2 (up to 10 Gbps)
+• USB 3.2 Gen 2 (up to 10 Gbps)
+• DisplayPort over USB-C
+• USB charging 5 V; 3 A
+• DC-in port 20 V; 100 W
+1 x 3.5 mm headphone/speaker jack, supporting headsets with built-in
+microphone
+1 x DC-in jack for AC adapter
+1 x Ethernet (RJ-45) port
+1 x HDMI®2.1 port with HDCP support
+(Notes: HDMI2.1: Support 4K 120Hz HDR, 8K 60Hz HDR, VRR, G-sync
+compatible external monitor)"
+12,,
+12,,
+12,,
+12,,
+12,,
+12,,
+12,,
+12,,
+12,,
+12,,
+12,,
+12,,
+12,,
+13,CPU,"Intel® Core™ i7-14650HX (3.70 GHz upto 5.20 GHz, 16 nhân 24 luồng, 30 MB Intel® Smart Cache)"
+13,RAM,"16GB (1x16GB) DDR5 5600MHz (2x SO-DIMM socket, up to 96GB SDRAM)"
+13,Ổ cứng,"1TB PCIe NVMe SED SSD (Còn trống 1 khe SSD M.2 PCIE Gen 4, nâng cấp tối đa 2TB SSD PCIe Gen 4)"
+13,VGA,"NVIDIA® GeForce RTX™ 4060 with 8 GB of dedicated GDDR6 VRAM, supporting 3072 NVIDIA® CUDA® Cores"
+13,Màn hình,"16"" WQXGA (2560 x 1600), 500 nits, 100% DCI-P3, 240Hz, Anti-glare, Acer ComfyView™ LED-backlit TFT LCD, Nvidia Advanced Optimus capable"
+13,Cổng giao tiếp,"2x USB Type-C™ port (supporting USB 3.2 Gen 2 (up to 10 Gbps); DisplayPort over USB-C; Thunderbolt™ 4; USB charging 5 V - 3 A, DC-in port 20 V - 65 W)
+1x USB 3.2 Gen 1
+1x USB 3.2 Gen 2
+1x USB 3.2 Gen 2 featuring power off USB charging
+1x HDMI® 2.1 port with HDCP support
+1x 3.5 mm headphone/speaker jack, supporting headsets with built-in microphone
+1x Ethernet (RJ-45) port
+1x DC-in jack for AC adapter
+1x MicroSD™ Card reader"
+13,Bàn phím,"Full size, RGB 4 Zone"
+13,Audio,DTS X:Ultra Audio
+13,,
+13,,
+13,,
+13,,
+13,,
+13,,
+13,,
+13,,
+13,,
+13,,
+13,,
+14,CPU,"Intel® Core™ i7-13620H (3.6GHz up to 4.9GHz, 10 Cores 16 Threads, 24 MB Intel® Smart Cache)"
+14,Ram,"16GB (2x8GB) DDR5 5200MHz (2x SO-DIMM socket, up to 32GB SDRAM)"
+14,Ổ cứng,"512GB PCIe NVMe SED SSD (Còn trống 1 khe SSD M.2 PCIE, nâng cấp tối đa 2TB)"
+14,Card đồ họa,NVIDIA® GeForce RTX™ 4050 with 6GB of dedicated GDDR6 VRAM
+14,Màn hình,"15.6"" FHD (1920 x 1080) IPS, 300nits,180Hz, sRGB 100%, ""Acer ComfyView™ LED-backlit TFT LCD
+ Wide viewing angle up to 170 degree 
+ Ultra-slim design"
+14,Cổng giao tiếp,"1 x USB Type-C™ port supporting:
+• USB 3.2 Gen 2 (up to 10 Gbps)
+• DisplayPort over USB-C
+• Thunderbolt™ 4
+• USB charging 5 V; 3 A
+• DC-in port 20 V; 65 W
+3 x USB Standard-A ports, supporting:
+• One port for USB 3.2 Gen 1 featuring power off USB charging
+• Two ports for USB 3.2 Gen 1
+1 x HDMI® 2.1 port with HDCP support
+1 x 3.5 mm headphone/speaker jack, supporting headsets with built-in
+microphone
+1 x Ethernet (RJ-45) port
+1 x DC-in jack for AC adapter"
+14,,
+14,,
+14,,
+14,,
+14,,
+14,,
+14,,
+14,,
+14,,
+14,,
+14,,
+14,,
+15,CPU,"Intel® Core™ i7-13620H (3.6GHz up to 4.9GHz, 10 Cores 16 Threads, 24 MB Intel® Smart Cache)"
+15,Ram,"16GB (1x16GB) DDR5 5200MHz (2x SO-DIMM socket, up to 32GB SDRAM)"
+15,Ổ cứng,"512GB PCIe NVMe SED SSD (Còn trống 1 khe SSD M.2 PCIE, nâng cấp tối đa 2TB)"
+15,Card đồ họa,NVIDIA® GeForce RTX™ 3050 with 6GB of dedicated GDDR6 VRAM
+15,Màn hình,"15.6"" FHD (1920 x 1080) IPS, 300nits,180Hz, sRGB 100%, ""Acer ComfyView™ LED-backlit TFT LCD
+ Wide viewing angle up to 170 degree 
+ Ultra-slim design"
+15,Cổng giao tiếp,"1 x USB Type-C™ port supporting:
+• USB 3.2 Gen 2 (up to 10 Gbps)
+• DisplayPort over USB-C
+• Thunderbolt™ 4
+• USB charging 5 V; 3 A
+• DC-in port 20 V; 65 W
+3 x USB Standard-A ports, supporting:
+• One port for USB 3.2 Gen 1 featuring power off USB charging
+• Two ports for USB 3.2 Gen 1
+1 x HDMI® 2.1 port with HDCP support
+1 x 3.5 mm headphone/speaker jack, supporting headsets with built-in
+microphone
+1 x Ethernet (RJ-45) port
+1 x DC-in jack for AC adapter"
+15,,
+15,,
+15,,
+15,,
+15,,
+15,,
+15,,
+15,,
+15,,
+15,,
+15,,
+15,,
+16,CPU,"Intel® Core™ i7-14700HX (1.5GHz upto 5.5GHz, 20 cores 28 threads, 33 MB Intel® Smart Cache)"
+16,RAM,"16GB (2 x 8GB) DDR5 5600MHz (2x SO-DIMM socket, up to 96GB SDRAM)"
+16,Ổ cứng,"1TB NVMe PCIe SSD Gen4x4 (còn trống 1 slot, nâng cấp tối đa 2TB)"
+16,VGA,"NVIDIA® GeForce RTX™ 4050 Laptop GPU 6GB GDDR6
+Up to 2355MHz Boost Clock 105W Maximum Graphics Power with Dynamic Boost."
+16,Màn hình,"16inch 16:10 FHD+(1920 x 1200) IPS-level, 165Hz, 100% sRGB"
+16,Cổng giao tiếp,"1x Type-C (USB3.2 Gen2 / DP) with PD charging
+3x Type-A USB3.2 Gen1
+1x HDMI™ 2.1 (8K @ 60Hz / 4K @ 120Hz)
+1x RJ45"
+16,Bàn phím,24-Zone RGB Gaming Keyboard
+16,Audio,2x 2W Speaker
+16,Chuẩn LAN,Gigabit Ethernet
+16,Chuẩn WIFI,802.11 ax Wi-Fi 6E
+16,Bluetooth,v5.3
+16,Webcam,"HD type (30fps@720p)
+3D Noise Reduction (3DNR)"
+16,,
+16,,
+16,,
+16,,
+16,,
+17,CPU,Intel Core i7-13700H 2.4GHz up to 5.0GHz 24MB
+17,RAM,"32GB (2x16GB) DDR5 5200MHz (2x SO-DIMM socket, up to 32GB SDRAM)"
+17,Ổ cứng,512GB PCIe® Gen4 NVMe™ TLC M.2 SSD (1 slot)
+17,VGA,NVIDIA® GeForce RTX™ 3050 6GB GDDR6
+17,Màn hình,"16.1"" FHD (1920 x 1080), 144 Hz, IPS, micro-edge, anti-glare, 250 nits, 45% NTSC"
+17,Cổng giao tiếp,"1x USB Type-C® 5Gbps signaling rate (USB Power Delivery, DisplayPort™ 1.4, HP Sleep and Charge)
+1x USB Type-A 5Gbps signaling rate (HP Sleep and Charge)
+2x USB Type-A 5Gbps signaling rate
+1x HDMI 2.1
+1x RJ-45
+1x AC smart pin
+1x headphone/microphone combo"
+17,Bàn phím,"Full-size, 1-zone RGB backlit, moonstone grey keyboard with numeric keypad"
+17,Audio,Audio by B&O; Dual speakers; HP Audio Boost
+17,Chuẩn LAN,10/100/1000 GbE LAN
+17,Chuẩn WIFI,MediaTek Wi-Fi 6E MT7922 (2x2)
+17,Bluetooth,v5.3
+17,Webcam,HP True Vision 1080p FHD camera with temporal noise reduction and integrated dual array digital microphones
+17,,
+17,,
+17,,
+17,,
+17,,
+18,CPU,"AMD Ryzen™ 5 7640HS ( 4.3 GHz - 5.0 GHz / 16MB / 6 nhân, 12 luồng )"
+18,RAM,"32GB (2x16GB) DDR5 5600MHz (2x SO-DIMM socket, up to 32GB SDRAM)"
+18,Ổ cứng,512GB PCIe® Gen4 NVMe™ TLC M.2 SSD (1 slot)
+18,VGA,GeForce RTX™ 4060 8GB GDDR6 
+18,Màn hình,"16.1"" FHD (1920 x 1080), 144 Hz, IPS, micro-edge, anti-glare, 250 nits, 45% NTSC"
+18,Cổng giao tiếp,"1x USB Type-C® 5Gbps signaling rate (USB Power Delivery, DisplayPort™ 1.4, HP Sleep and Charge)
+1x USB Type-A 5Gbps signaling rate (HP Sleep and Charge)
+2x USB Type-A 5Gbps signaling rate
+1x HDMI 2.1
+1x RJ-45
+1x AC smart pin
+1x headphone/microphone combo"
+18,Bàn phím,"Full-size, 1-zone RGB backlit, moonstone grey keyboard with numeric keypad"
+18,Audio,Audio by B&O; Dual speakers; HP Audio Boost
+18,Chuẩn LAN,10/100/1000 GbE LAN
+18,Chuẩn WIFI,MediaTek Wi-Fi 6E MT7922 (2x2)
+18,Bluetooth,v5.3
+18,,
+18,,
+18,,
+18,,
+18,,
+18,,
+19,CPU,"Intel® Core™ Ultra 7 Processor 155H, 16 nhân 22 luồng, upto 3.8Ghz - 4.8Ghz, 24 MB Intel® Smart Cache"
+19,RAM,32GB (1*32GB) LPDDR5X 7467Mhz (Không nâng cấp)
+19,Ổ cứng,2TB PCIe NVMe SED SSD (nâng cấp tối đa 2TB SSD)
+19,VGA,"NVIDIA® GeForce RTX™ 4060 with 8 GB of dedicated GDDR6 VRAM, supporting 3072 NVIDIA® CUDA® Cores"
+19,Màn hình,"16"" 2.5K (2560x1600) 500nits, 100% DCI-P3, 240Hz, Acer ComfyView™ LED-backlit, Nvidia Advanced Optimus capable, 16:10 aspect ratio, Wide viewing angle up to 170 degrees"
+19,Cổng giao tiếp,"2x USB Type-C™ ports USB Type-C™ port, supporting: 
+ • USB 3.2 Gen 2x2 (up to 20 Gbps) 
+ • DisplayPort over USB-C 
+ • Thunderbolt™ 4 
+ • USB charging 5 V; 3 A 
+ • DC-in port 20 V; 65 W 
+ USB Type-C™ port supporting: 
+ • USB 3.2 Gen 2 (up to 10 Gbps) 
+ • DisplayPort over USB-C 
+ • USB charging 5 V; 3 A 
+ • DC-in port 20 V; 65 W 
+2x USB Standard-A ports, supporting: 
+ • One port for USB 3.2 Gen 2 
+ • One port for USB 3.2 Gen 2 featuring power off USB charging microSD™ Card reader 
+1x HDMI® 2.1 port with HDCP support 
+1x DC-in jack for AC adapter 
+1x 3.5 mm headphone/speaker jack, supporting headsets with built-in microphone"
+19,,
+19,,
+19,,
+19,,
+19,,
+19,,
+19,,
+19,,
+19,,
+19,,
+19,,
+19,,
+19,,
+20,CPU,"Intel® Core™ Ultra 7 155H, 1.40 GHz upto 4.80 GHz, 16 nhân 22 luồng, 24MB Intel® Smart Cache"
+20,RAM,32GB LPDDR5 Onboard 6400Mhz
+20,Ổ cứng,1TB PCIe NVMe SED SSD (Không nâng cấp được)
+20,Card đồ họa,NVIDIA® GeForce RTX™ 4070 with 8 GB GDDR6 VRAM
+20,Màn hình,"14.5"" 2.8K WQXGA+ (2880x1800) OLED, 120Hz, 400 nits. DCI-P3 100%, Adobe100%"
+20,Cổng giao tiếp,"2x USB Type-C™, supporting:
+ • USB4® 40Gbps
+ • DisplayPort over USB-C
+ • Thunderbolt™ 4
+ • USB charging 5 V; 3 A
+ • DC-in port 20 V; 100 W
+2x USB Standard A, supporting:
+ • One port for USB 3.2 Gen 1
+ • One port for USB 3.2 Gen 2 featuring power off USB charging
+1x HDMI® 2.1 port with HDCP support
+1x microSD™ Card reader
+1x 3.5 mm headphone/speaker jack, supporting headsets with built-in
+ microphone"""
+20,Audio,"DTS® X:Ultra Audio, featuring optimized Bass, Loudness, Speaker"
+20,Bàn phím,"Có LED trắng, bảo mật vân tay"
+20,Bảo mật,"Firmware Trusted Platform Module (TPM) solution 
+BIOS user, supervisor passwords"
+20,,
+20,,
+20,,
+20,,
+20,,
+20,,
+20,,
+20,,
+20,,
+21,CPU,"Intel® Core™ Ultra 7 155H, 1.40 GHz upto 4.80 GHz, 16 nhân 22 luồng, 24MB Intel® Smart Cache"
+21,RAM,32GB LPDDR5 Onboard 6400Mhz
+21,Ổ cứng,1TB PCIe NVMe SED SSD (Không nâng cấp được)
+21,Card đồ họa,NVIDIA® GeForce RTX™ 4060 with 8 GB GDDR6
+21,Màn hình,"14.5"" 2.8K WQXGA+ (2880x1800) OLED, 120Hz, 400 nits. DCI-P3 100%, Adobe100%"
+21,Cổng giao tiếp,"2x USB Type-C™, supporting:
+ • USB4® 40Gbps
+ • DisplayPort over USB-C
+ • Thunderbolt™ 4
+ • USB charging 5 V; 3 A
+ • DC-in port 20 V; 100 W
+2x USB Standard A, supporting:
+ • One port for USB 3.2 Gen 1
+ • One port for USB 3.2 Gen 2 featuring power off USB charging
+1x HDMI® 2.1 port with HDCP support
+1x microSD™ Card reader
+1x 3.5 mm headphone/speaker jack, supporting headsets with built-in
+ microphone"""
+21,Audio,"DTS® X:Ultra Audio, featuring optimized Bass, Loudness, Speaker"
+21,Bàn phím,"Có LED trắng, bảo mật vân tay"
+21,Bảo mật,"Firmware Trusted Platform Module (TPM) solution 
+BIOS user, supervisor passwords"
+21,,
+21,,
+21,,
+21,,
+21,,
+21,,
+21,,
+21,,
+21,,
+24,CPU,"Intel® Core™ i9 Processor 14900HX 2.2 GHz (36MB Cache, up to 5.8 GHz, 24 cores, 32 Threads)"
+24,RAM,"64GB (2x32GB) DDR5 5600MHz (2x SO-DIMM socket, up to 64GB SDRAM)"
+24,Ổ Cứng,2TB PCIe® 4.0 NVMe™ M.2 Performance SSD (Còn trống 1 khe M.2 PCIe Gen4x4)
+24,Card đồ họa,"NVIDIA® GeForce RTX™ 4090 16GB GDDR6 (686 AI TOPs)
+ROG Boost: 2090MHz* at 175W (2040MHz Boost Clock+50MHz OC, 150W+25W Dynamic Boost)"
+24,Màn hình,"16"" WQXGA (2560 x 1600) 16:10, 240Hz/3ms, MiniLed, Non-Glare, NanoEdge, DCI-P3:100.00%, 1100nits, G-Sync, Pantone Validated, ROG Nebula Display, Support Dolby Vision HDR"
+24,Cổng kết nối,"1x 3.5mm Combo Audio Jack
+1x HDMI 2.1 FRL
+1x Thunderbolt™ 4 support DisplayPort™ / G-SYNC
+1x USB 3.2 Gen 2 Type-C support DisplayPort™ / power delivery / G-SYNC
+2x USB 3.2 Gen 2 Type-A
+1x 2.5G LAN port"
+24,Bàn phím,Backlit Chiclet Keyboard Per-Key RGB
+24,Audio,"Dolby Atmos, Hi-Res certification, Smart Amp Technology, AI noise-canceling technology"
+24,Lan,10/100/1000/2500 Mbps
+24,,
+24,,
+24,,
+24,,
+24,,
+24,,
+24,,
+25,CPU,"AMD Ryzen™ AI 9 HX 370 Processor 2.0GHz (36MB Cache, up to 5.1GHz, 12 cores, 24 Threads); AMD Ryzen™ AI up to 81 TOPs"
+25,RAM,32GB LPDDR5X on board
+25,Ổ cứng,1TB M.2 NVMe™ PCIe® 4.0 SSD
+25,VGA,AMD Radeon™ Graphics
+25,Màn hình,"14"" 3K (2880 x 1800) OLED 16:10 aspect ratio, 120Hz refresh rate, 600nits HDR peak brightness, 100% DCI-P3 color gamut, Gamut mapping, Contrast ratio 1,000,000:1, VESA CERTIFIED Display HDR True Black 600, 1.07 billion colors, Glossy display, 70% less harmful blue light, Screen-to-body ratio: 87％"
+25,Cổng giao tiếp,"1x USB 3.2 Gen 1 Type-C support display / power delivery
+2x USB 3.2 Gen 1 Type-A
+1x USB 4.0 Gen 3 Type-C support display / power delivery
+1x HDMI 2.1 TMDS
+1x 3.5mm Combo Audio Jack
+Micro SD card reader"
+25,Bàn phím,Backlit Chiclet Keyboard 1-Zone RGB without Num-key With Copilot key
+25,Audio,Smart Amp Technology harman/kardon (Mainstream)
+25,Đọc thẻ nhớ,None
+25,Chuẩn LAN,None
+25,Chuẩn WIFI,Wi-Fi 6E(802.11ax) (Dual band) (2x2)
+25,,
+25,,
+25,,
+25,,
+25,,
+25,,
+25,,
+25,,
+26,CPU,"Intel® Core™ Ultra 5 Processor 125H 1.2 GHz (18MB Cache, up to 4.5 GHz, 14 cores, 18 Threads); Intel® AI Boost NPU"
+26,RAM,16GB LPDDR5X Onboard 7467Mhz
+26,Ổ cứng,512GB M.2 NVMe™ PCIe® 4.0 SSD
+26,VGA,Intel® Arc™ Graphics
+26,Màn hình,"14"" 3K (2880 x 1800) OLED 16:10 aspect ratio, 120Hz refresh rate, 600nits HDR peak brightness, 100% DCI-P3 color gamut, Gamut mapping, Contrast ratio 1,000,000:1, VESA CERTIFIED Display HDR True Black 600, 1.07 billion colors, Glossy display, 70% less harmful blue light, Screen-to-body ratio: 87％"
+26,Cổng giao tiếp,"2x Thunderbolt™ 4 supports display / power delivery
+2x USB 3.2 Gen 1 Type-A
+1x HDMI 2.1 TMDS
+1x 3.5mm Combo Audio Jack Micro SD card reader"
+26,Bàn phím,Backlit Chiclet Keyboard 1-Zone RGB without Num-key With Copilot key
+26,Audio,Harman/Kardon
+26,Đọc thẻ nhớ,None
+26,Chuẩn LAN,None
+26,Chuẩn WIFI,Wi-Fi 6E(802.11ax) (Dual band) (2x2)
+26,Bluetooth,v5.3
+26,,
+26,,
+26,,
+26,,
+26,,
+26,,
+26,,
+27,CPU,"Intel® Core™ Ultra 7 processor 155H (upto 4.8GHz, 16 lõi 22 luồng, 24 MB Intel® Smart Cache)"
+27,RAM,16GB (1x16GB) LPDDR5 6400MHz Onboard (Không nâng cấp được)
+27,Ổ cứng,"512GB PCIe NVMe SED SSD (2 slots, nâng cấp tối đa 2TB)"
+27,Card đồ họa,Intel® ARC™ Graphics
+27,Màn hình,"14"" 2.8K (2880x1800) OLED 16:10 aspect ratio, 90Hz, 400nits, DCI-P3 100%, Adobe100%"
+27,Cổng giao tiếp," 2x USB Type-C™ 
+  port supporting:
+ • USB4® 40Gbps
+ • Thunderbolt™ 4
+ • USB charging 5 V; 3 A
+ • DC-in port 20 V; 100 W
+2x USB Standard-A ports, supporting:
+ • One port for USB 3.2 Gen 1
+ • One port for USB 3.2 Gen 1 featuring power off USB charging
+1x microSD™ Card reader
+1x Headphone/speaker jack
+1x HDMI®
+1x 2.1 port with HDCP support"
+27,Audio,Acer TrueHarmony technology
+27,Bàn phím,"Có LED, Đơn sắc - Trắng"
+27,Bảo mật,Power keycap fingerprint reader with on-chip matching design
+27,Chuẩn WIFI,"Killer Wi-Fi 7 Wireless LAN
+ • 802.11 a/b/g/n/ac/ax/be
+ • Band: 2.4 GHz, 5 GHz, and 6 GHz
+ • 2x2 MIMO technology"
+27,,
+27,,
+27,,
+27,,
+27,,
+27,,
+27,,
+27,,
+28,CPU,"Intel Core i5-13420H 3.3GHz up to 4.4GHz, 12MB Smart Cache, 8 Cores 12 Threads"
+28,Ram,"8GB (8x1) DDR5 5200MHz (2x SO-DIMM socket, up to 32GB SDRAM)"
+28,Ổ cứng,"512GB PCIe NVMe SED SSD (Còn trống 1 khe SSD M.2 PCIE, nâng cấp tối đa 2TB)"
+28,Card đồ họa,NVIDIA® GeForce RTX™ 4050 with 6 GB of dedicated GDDR6 VRAM
+28,Màn hình,"15.6"" FHD (1920 x 1080) IPS, 144Hz, 3ms,  Acer ComfyView LED-backlit TFT LCD, 45% NTSC"
+28,Cổng giao tiếp,"1 x USB Type-C™ port supporting:
+• USB 3.2 Gen 2 (up to 10 Gbps)
+• DisplayPort over USB-C
+• Thunderbolt™ 4
+• USB charging 5 V; 3 A
+• DC-in port 20 V; 65 W
+3 x USB Standard-A ports, supporting:
+• One port for USB 3.2 Gen 1 featuring power off USB charging
+• Two ports for USB 3.2 Gen 1
+1 x HDMI® 2.1 port with HDCP support
+1 x 3.5 mm headphone/speaker jack, supporting headsets with built-in
+microphone
+1 x Ethernet (RJ-45) port
+1 x DC-in jack for AC adapter"
+28,Audio,DTS® X:Ultra
+28,,
+28,,
+28,,
+28,,
+28,,
+28,,
+28,,
+28,,
+28,,
+28,,
+28,,
+29,CPU,"Intel® Core™ Ultra 5 processor 125H (upto 4.5GHz, 14 lõi 18 luồng, 18 MB Intel® Smart Cache)"
+29,RAM,16GB (1x16GB) LPDDR5 6400MHz Onboard (Không nâng cấp được)
+29,Ổ cứng,"512GB PCIe NVMe SED SSD (2 slots, nâng cấp tối đa 2TB)"
+29,Card đồ họa,Intel® ARC™ Graphics
+29,Màn hình,"14"" 2.8K (2880x1800) OLED 16:10 aspect ratio, 90Hz, 400nits, DCI-P3 100%, Adobe100%"
+29,Cổng giao tiếp," 2x USB Type-C™ 
+  port supporting:
+ • USB4® 40Gbps
+ • Thunderbolt™ 4
+ • USB charging 5 V; 3 A
+ • DC-in port 20 V; 100 W
+2x USB Standard-A ports, supporting:
+ • One port for USB 3.2 Gen 1
+ • One port for USB 3.2 Gen 1 featuring power off USB charging
+1x microSD™ Card reader
+1x Headphone/speaker jack
+1x HDMI®
+1x 2.1 port with HDCP support"
+29,Audio,Acer TrueHarmony technology
+29,Bàn phím,"Có LED, Đơn sắc - Trắng"
+29,Bảo mật,Power keycap fingerprint reader with on-chip matching design
+29,Chuẩn WIFI,"Killer Wi-Fi 7 Wireless LAN
+ • 802.11 a/b/g/n/ac/ax/be
+ • Band: 2.4 GHz, 5 GHz, and 6 GHz
+ • 2x2 MIMO technology"
+29,,
+29,,
+29,,
+29,,
+29,,
+29,,
+29,,
+29,,
+30,CPU,"AMD Ryzen™ AI 9 HX 370 Processor 2.0GHz (36MB Cache, up to 5.1GHz, 12 cores, 24 Threads); AMD Ryzen™ AI up to 81 TOPs"
+30,RAM,32GB (16x2) Onboard LPDDR5X 7467MHz (Không nâng cấp được)
+30,Ổ lưu trữ,"1TB PCIe® 4.0 NVMe™ M.2 SSD (2 slot, support M.2 2280 PCIe 4.0x4)"
+30,Card đồ họa,"NVIDIA® GeForce RTX™ 4070 Laptop GPU With ROG Boost: 1655MHz* at 105W (1605MHz Boost Clock+50MHz OC, 85W+20W Dynamic Boost)"
+30,Màn hình,"16-inch 2.5K (2560 x 1600, WQXGA) 16:10 OLED, 240Hz, 0.2ms, 500 nits, 100% DCI-P3, Glossy display, G-Sync / Adaptive-Sync, ROG Nebula Display"
+30,Cổng giao tiếp,"""1x Type C USB 4 support DisplayPort™ / power delivery
+1x USB 3.2 Gen 2 Type-C support DisplayPort™ / power delivery
+2x USB 3.2 Gen 2 Type-A
+1x card reader (SD Card) (SD Express 7.0)""
+1x HDMI 2.1 FRL
+1x 3.5mm Combo Audio Jack"
+30,Bàn phím,"""Backlit Chiclet Keyboard 1-Zone RGB
+With Copilot key"
+30,Audio,"4-speaker (dual force woofer) system with Smart Amplifier Technology, 2 Tweeters"
+30,Đọc thẻ nhớ,"Card reader (SD) (UHS-II, 312MB/s)"
+30,LAN,N/A
+30,Wifi,Wi-Fi 7(802.11be) (Triple band) 2*2
+30,,
+30,,
+30,,
+30,,
+30,,
+30,,
+30,,
+30,,
+31,CPU,Intel Core i7-13700H 2.4GHz up to 5.0GHz 24MB
+31,RAM,"32GB (2x16GB) DDR5 5200MHz (2x SO-DIMM socket, up to 32GB SDRAM)"
+31,Ổ cứng,512GB PCIe® Gen4 NVMe™ TLC M.2 SSD (1 slot)
+31,VGA,NVIDIA® GeForce RTX™ 3050 6GB GDDR6
+31,Màn hình,"16.1"" FHD (1920 x 1080), 144 Hz, IPS, micro-edge, anti-glare, 250 nits, 45% NTSC"
+31,Cổng giao tiếp,"1x USB Type-C® 5Gbps signaling rate (USB Power Delivery, DisplayPort™ 1.4, HP Sleep and Charge)
+1x USB Type-A 5Gbps signaling rate (HP Sleep and Charge)
+2x USB Type-A 5Gbps signaling rate
+1x HDMI 2.1
+1x RJ-45
+1x AC smart pin
+1x headphone/microphone combo"
+31,Bàn phím,"Full-size, 1-zone RGB backlit, moonstone grey keyboard with numeric keypad"
+31,Audio,Audio by B&O; Dual speakers; HP Audio Boost
+31,Chuẩn LAN,10/100/1000 GbE LAN
+31,Chuẩn WIFI,MediaTek Wi-Fi 6E MT7922 (2x2)
+31,Bluetooth,v5.3
+31,Webcam,HP True Vision 1080p FHD camera with temporal noise reduction and integrated dual array digital microphones
+31,,
+31,,
+31,,
+31,,
+31,,
+32,CPU,Intel Core i7-13700H 2.4GHz up to 5.0GHz 24MB
+32,RAM,"32GB (2x16GB) DDR5 5200MHz (2x SO-DIMM socket, up to 32GB SDRAM)"
+32,Ổ cứng,512GB PCIe® Gen4 NVMe™ TLC M.2 SSD (1 slot)
+32,VGA,NVIDIA® GeForce RTX™ 4050 6GB GDDR6
+32,Màn hình,"16.1"" FHD (1920 x 1080), 144 Hz, IPS, micro-edge, anti-glare, 250 nits, 45% NTSC"
+32,Cổng giao tiếp,"1x USB Type-C® 5Gbps signaling rate (USB Power Delivery, DisplayPort™ 1.4, HP Sleep and Charge)
+1x USB Type-A 5Gbps signaling rate (HP Sleep and Charge)
+2x USB Type-A 5Gbps signaling rate
+1x HDMI 2.1
+1x RJ-45
+1x AC smart pin
+1x headphone/microphone combo"
+32,Bàn phím,"Full-size, 1-zone RGB backlit, moonstone grey keyboard with numeric keypad"
+32,Audio,Audio by B&O; Dual speakers; HP Audio Boost
+32,Chuẩn LAN,10/100/1000 GbE LAN
+32,Chuẩn WIFI,MediaTek Wi-Fi 6E MT7922 (2x2)
+32,Bluetooth,v5.3
+32,Webcam,HP True Vision 1080p FHD camera with temporal noise reduction and integrated dual array digital microphones
+32,,
+32,,
+32,,
+32,,
+32,,
+33,CPU,Intel Core i7-13700H 2.4GHz up to 5.0GHz 24MB
+33,RAM,"16GB (2x8GB) DDR5 5200MHz (2x SO-DIMM socket, up to 32GB SDRAM)"
+33,Ổ cứng,512GB PCIe® Gen4 NVMe™ TLC M.2 SSD (1 slot)
+33,VGA,"NVIDIA® GeForce RTX™ 4060 8GB GDDR6 (TGP: 120W, Boost clock: 2250 Mhz)"
+33,Màn hình,"16.1"" FHD (1920 x 1080), 144 Hz, IPS, micro-edge, anti-glare, 250 nits, 45% NTSC"
+33,Cổng giao tiếp,"1x USB Type-C® 5Gbps signaling rate (USB Power Delivery, DisplayPort™ 1.4, HP Sleep and Charge)
+1x USB Type-A 5Gbps signaling rate (HP Sleep and Charge)
+2x USB Type-A 5Gbps signaling rate
+1x HDMI 2.1
+1x RJ-45
+1x AC smart pin
+1x headphone/microphone combo"
+33,Bàn phím,"Full-size, 1-zone RGB backlit, moonstone grey keyboard with numeric keypad"
+33,Audio,Audio by B&O; Dual speakers; HP Audio Boost
+33,Chuẩn LAN,10/100/1000 GbE LAN
+33,Chuẩn WIFI,MediaTek Wi-Fi 6E MT7922 (2x2)
+33,Bluetooth,v5.3
+33,,
+33,,
+33,,
+33,,
+33,,
+33,,
+34,CPU,"AMD Ryzen™ 7 7435HS (8C / 16T, 3.1 / 4.5GHz, 4MB L2 / 16MB L3)"
+34,RAM,"24GB (2x12GB) DDR5-4800 SO-DIMM (2x SO-DIMM socket, up to 32GB SDRAM)"
+34,Ổ cứng,512GB SSD M.2 2242 PCIe® 4.0x4 NVMe® (2 Slots: M2 2242 PCIe 4.0 x4 Slot/ M.2 2280 PCIe 4.0 x4 Slot)
+34,Card đồ họa,"NVIDIA® GeForce RTX™ 4060 8GB GDDR6, Boost Clock 2370MHz, TGP 105W"
+34,Màn hình,"15.6"" FHD (1920x1080) IPS 300nits Anti-glare, 100% sRGB, 144Hz, G-SYNC®"
+34,Cổng kết nối,"3x USB-A (USB 5Gbps / USB 3.2 Gen 1)
+1x USB-C® (USB 10Gbps / USB 3.2 Gen 2), with Lenovo® PD 140W and DisplayPort™ 1.4
+1x HDMI® 2.1, up to 8K/60Hz
+1x Headphone / microphone combo jack (3.5mm)
+1x Ethernet (RJ-45)
+1x Power connector"
+34,Bàn phím,"White Backlit, English"
+34,Audio,"Stereo speakers, 2W x2, optimized with Nahimic Audio"
+34,Chuẩn Lan,100/1000M (RJ-45)
+34,Wifi + Bluetooth,"Wi-Fi® 6, 11ax 2x2 + BT5.2"
+34,Webcam,HD 720p with E-shutter
+34,,
+34,,
+34,,
+34,,
+34,,
+34,,
+35,CPU,"Intel® Core™ i7-13650HX, 14C (6P + 8E) / 20T, P-core 2.6 / 4.9GHz, E-core 1.9 / 3.6GHz, 24MB"
+35,RAM,"24GB (2x12GB) SO-DIMM DDR5 4800MHz (2x SO-DIMM socket, up to 32GB SDRAM)"
+35,Ổ cứng,"512GB SSD M.2 2242 PCIe® 4.0x4 NVMe® (2 slots M.2 2280 PCIe® 4.0 x4, nâng cấp tối đa 2TB)"
+35,Card đồ họa,"NVIDIA® GeForce RTX™ 4060 8GB GDDR6, Boost Clock 2370MHz, TGP 140W, 233 AI TOPS"
+35,Màn hình,"15.6"" FHD (1920x1080) IPS 300nits Anti-glare, 100% sRGB, 144Hz, G-SYNC®"
+35,Cổng giao tiếp,"2x USB-A (USB 5Gbps / USB 3.2 Gen 1)
+1x USB-A (USB 5Gbps / USB 3.2 Gen 1), Always On
+1x USB-C® (USB 10Gbps / USB 3.2 Gen 2), with Lenovo® PD 140W and DisplayPort™ 1.4
+1x USB-C® (USB 10Gbps / USB 3.2 Gen 2), with DisplayPort™ 1.4
+1x HDMI® 2.1, up to 8K/60Hz
+1x Headphone / microphone combo jack (3.5mm)
+1x Ethernet (RJ-45)
+1x Power connector"
+35,Bàn phím,"White Backlit, English"
+35,Audio,"Stereo speakers, 2W x2, optimized with Nahimic Audio"
+35,Finger Print,None
+35,Chuẩn LAN,100/1000M (RJ-45)
+35,Chuẩn WIFI,"Wi-Fi® 6E, 11ax 2x2"
+35,Bluetooth,v5.2
+35,Webcam,HD 720p with E-shutter
+35,Hệ điều hành,"Windows® 11 Home Single Language, English"
+35,Pin,Integrated 80Wh
+35,Trọng lượng,2.32 kg
+35,Màu sắc,Storm Grey
+35,Chất liệu,"Aluminium Stamping (Anodized with Sandblasting) 
+Aluminium (Top), PC-ABS (Bottom)"
+35,Kích thước,358.8 x 261.4 x 20.5-24.65 mm (14.13 x 10.29 x 0.81-0.97 inches)
+37,CPU,"AMD Ryzen™ 7 7735HS Mobile Processor (8-core/16-thread, 16MB L3 cache, up to 4.7 GHz max boost)"
+37,RAM,"16GB (2x8GB) DDR5 4800MHz (2x SO-DIMM socket, up to 32GB SDRAM)"
+37,Ổ cứng,1TB PCIe® 4.0 NVMe™ M.2 SSD (2230) (Còn trống 1 khe SSD M.2 PCIe)
+37,Card đồ họa,"NVIDIA® GeForce RTX™ 4060 Laptop GPU 8GB GDDR6, 2420MHz* at 140W (2370MHz Boost Clock+50MHz OC, 115W+25W Dynamic Boost) + AMD Radeon™ Navi2 Graphics, MUX Switch + NVIDIA® Advanced Optimus"
+37,Màn hình,"15.6"" FHD (1920 x 1080) 16:9 IPS, 144Hz, Wide View, 250nits, Narrow Bezel, Non-Glare with 72% NTSC, 100% sRGB, G-Sync"
+37,Cổng giao tiếp,"1x USB 3.2 Gen 2 Type-C support DisplayPort™ / power delivery / G-SYNC
+ 2x USB 3.2 Gen 1 Type-A
+1x RJ-45 LAN
+1x HDMI 2.1 FRL
+1x COMBO audio jack
+1x Type C USB 4 support DisplayPort™ / G-SYNC"
+37,Audio,Dolby Atmos
+37,Bàn phím,Backlit Chiclet Keyboard 1-Zone RGB
+37,Chuẩn LAN,10/100/1000 Mbps
+37,,
+37,,
+37,,
+37,,
+37,,
+37,,
+37,,
+37,,
+38,CPU,"Intel Core Ultra 9 185H (1.8GHz upto 5.1GHz, 16 cores 22 threads, 24 MB Intel® Smart Cache)"
+38,RAM,"32GB (2x16GB) DDR5 5600MHz (2x SO-DIMM socket, up to 96GB SDRAM)"
+38,Ổ lưu trữ,2TB NVMe PCIe Gen4x4 SSD (2 x M.2 SSD slots)
+38,Card đồ họa,"NVIDIA® GeForce RTX™ 4080 Laptop GPU 12GB GDDR6
+Up to 2100MHz Boost Clock 150W Maximum Graphics Power with Dynamic Boost.
++ Intel® Arc™ graphics"
+38,Màn hình,"18"" 16:10 UHD+ (3840x2400), MiniLED, 120Hz, 100% DCI-P3 (Typ.), IPS-Level Panel"
+38,Cổng giao tiếp,"1x Type-C (USB3.2 Gen2 / DP)
+1x Type-C (USB / DP / Thunderbolt™ 4) with PD3.1 charging
+2x Type-A USB3.2 Gen2
+1x SD Express Card Reader
+1x HDMI™ 2.1 (8K @ 60Hz / 4K @ 120Hz)
+1x RJ45"
+38,Bàn phím,Per-Key RGB Gaming Keyboard by SteelSeries
+38,Audio,"2 x 2W loa con và 4 x 2W loa trầm, thiết kế bởi Dynaudio, Nahimic 3 Audio Enhancer, hỗ trợ Hi-Res Audio"
+38,LAN,Killer Gb LAN (Up to 2.5G)
+38,Wifi + Bluetooth,802.11 be Wi-Fi 7 + Bluetooth v5.4
+38,Bảo mật,"Fingerprint Security
+Firmware Trusted Platform Module(fTPM) 2.0"
+38,,
+38,,
+38,,
+38,,
+38,,
+38,,
+38,,
+39,CPU,"Intel® Core™ Ultra 9 185H (2.3 GHz upto 5.1 GHz, 16 nhân 32 luồng, 24MB Intel® Smart Cache)"
+39,RAM,32GB LPDDR5X 6400MHz onboard (Không nâng cấp)
+39,Ổ cứng,1TB PCIe NVMe SED SSD (Không nâng cấp)
+39,VGA,NVIDIA® GeForce RTX™ 4070 with 8GB of dedicated GDDR6 VRAM
+39,Màn hình,"14.5"" 3K WQXGA+ (3072x1920) 16:10, IPS, 400 nits, 100% sRGB, 165Hz, Acer ComfyView™ LED-backlit TFT
+ LCD, Nvidia Advanced Optimus capable"
+39,Cổng giao tiếp," 2x USB Type-C™ ports
+ USB Type-C™ port supporting:
+ • USB 3.2 Gen 2 (up to 10 Gbps)
+ • DisplayPort over USB-C
+ • Thunderbolt™ 4
+ • USB charging 5 V; 3 A
+ • DC-in port 20 V; 65 W
+2x USB Standard-A ports, supporting:
+ • One port for USB 3.2 Gen 2
+ • One port for USB 3.2 Gen 2 featuring power off USB charging
+ HDMI® 2.1 port with HDCP support
+ 3.5 mm headphone/speaker jack, 
+ microSD™ Card reader"
+39,Bàn phím,3-zone RGB
+39,Audio,DTS X:Ultra Audio
+39,Tản nhiệt,"Dual Fan (1x AeroBlade 3D 5th gen)
+ Liquid Metal"
+39,Chuẩn LAN,Killer™ Ethernet E3100G
+39,Chuẩn WIFI,Killer Wireless Wi-Fi 6E 1675i
+39,Bluetooth,v5.3
+39,Webcam," Narrow USB FHD camera with blue glass
+ • 1920 x 1080 resolution
+ • 1080p HD video at 60 fps with Temporal Noise Reduction"
+39,Hệ điều hành,Windows 11 Home Single Language
+39,Pin,76 Wh 4-cell Li-ion battery
+39,Trọng lượng,1.9 kg
+39,Màu sắc,Abyssal Black
+39,Chất liệu,"Cover A: Aluminium
+ Cover B,C,D: ABS Plastic"
+39,,
+40,CPU,"Intel® Core™ Ultra 9 185H (2.3 GHz upto 5.1 GHz, 16 nhân 32 luồng, 24MB Intel® Smart Cache)"
+40,RAM,32GB LPDDR5X 6400MHz onboard (Không nâng cấp)
+40,Ổ cứng,1TB PCIe NVMe SED SSD (Không nâng cấp)
+40,VGA,NVIDIA® GeForce RTX™ 4060 with 8 GB of dedicated GDDR6 VRAM
+40,Màn hình,"14.5"" 3K WQXGA+ (3072x1920) 16:10, IPS, 400 nits, 100% sRGB, 165Hz, Acer ComfyView™ LED-backlit TFT
+ LCD, Nvidia Advanced Optimus capable"
+40,Cổng giao tiếp," 2x USB Type-C™ ports
+ USB Type-C™ port supporting:
+ • USB 3.2 Gen 2 (up to 10 Gbps)
+ • DisplayPort over USB-C
+ • Thunderbolt™ 4
+ • USB charging 5 V; 3 A
+ • DC-in port 20 V; 65 W
+2x USB Standard-A ports, supporting:
+ • One port for USB 3.2 Gen 2
+ • One port for USB 3.2 Gen 2 featuring power off USB charging
+ HDMI® 2.1 port with HDCP support
+ 3.5 mm headphone/speaker jack, 
+ microSD™ Card reader"
+40,Bàn phím,3-zone RGB
+40,Audio,DTS X:Ultra Audio
+40,Tản nhiệt,"Dual Fan (1x AeroBlade 3D 5th gen)
+ Liquid Metal"
+40,Chuẩn LAN,Killer™ Ethernet E3100G
+40,Chuẩn WIFI,Killer Wireless Wi-Fi 6E 1675i
+40,Bluetooth,v5.3
+40,Webcam," Narrow USB FHD camera with blue glass
+ • 1920 x 1080 resolution
+ • 1080p HD video at 60 fps with Temporal Noise Reduction"
+40,Hệ điều hành,Windows 11 Home Single Language
+40,Pin,76 Wh 4-cell Li-ion battery
+40,Trọng lượng,1.9 kg
+40,Màu sắc,Abyssal Black
+40,Chất liệu,"Cover A: Aluminium
+ Cover B,C,D: ABS Plastic"
+40,,
+41,CPU,"Intel® Core™ i5-12500H Processor 2.5 GHz (18M Cache, up to 4.5 GHz, 4P+8E cores)"
+41,RAM,16GB (8GB Onboard + 8GB Sodimm) DDR4 3200MHz
+41,Ổ cứng,512GB M.2 NVMe™ PCIe® 4.0 SSD
+41,VGA,NVIDIA® Geforce RTX™ 3050 4GB Laptop GPU
+41,Màn hình,"16.0-inch WUXGA (1920 x 1200) 16:10, IPS-level Panel, 144Hz, 300nits, 45% NTSC color gamut, Anti-glare display, TÜV Rheinland-certified"
+41,Cổng giao tiếp,"1x USB 3.2 Gen 1 Type-C support power delivery
+2x USB 3.2 Gen 1 Type-A
+1x HDMI 2.1 TMDS
+1x 3.5mm Combo Audio Jack
+1x DC-in
+SD 4.0 card reader"
+41,Bàn phím,Backlit Chiclet Keyboard with Num-key
+41,Audio,"SonicMaster
+Built-in speaker
+Built-in array microphone"
+41,Đọc thẻ nhớ,None
+41,Chuẩn LAN,None
+41,Chuẩn WIFI,Wi-Fi 6E(802.11ax) (Dual band) 2*2
+41,Bluetooth,Bluetooth® 5.3 Wireless Card
+41,Webcam,720p HD camera ; With privacy shutter
+41,Hệ điều hành,Windows 11 Home
+41,Pin,"50WHrs, 3S1P, 3-cell Li-ion"
+41,Trọng lượng,1.80 kg (3.97 lbs)
+41,Màu sắc,Indie Black
+41,Chất liệu,"LCD cover (Aluminum), Top case (Plastic)"
+41,Kích thước,35.86 x 24.91 x 1.89 ~ 1.89 cm
+42,CPU,"Intel® Core™ i5-12500H Processor 2.5 GHz (18M Cache, up to 4.5 GHz, 4P+8E cores)"
+42,RAM,16GB (1x16GB) DDR4 3200MHz Onboard
+42,Ổ cứng,512GB M.2 NVMe™ PCIe® 4.0 SSD
+42,VGA,NVIDIA® GeForce RTX™ 4050 Laptop GPU
+42,Màn hình,"16.0-inch WUXGA (1920 x 1200) 16:10, IPS-level Panel, 144Hz, 300nits, 45% NTSC color gamut, Anti-glare display, TÜV Rheinland-certified"
+42,Cổng giao tiếp,"1x USB 3.2 Gen 1 Type-C support power delivery
+2x USB 3.2 Gen 1 Type-A
+1x HDMI 2.1 TMDS
+1x 3.5mm Combo Audio Jack
+1x DC-in
+SD 4.0 card reader"
+42,Bàn phím,Backlit Chiclet Keyboard with Num-key
+42,Audio,"SonicMaster
+Built-in speaker
+Built-in array microphone"
+42,Đọc thẻ nhớ,None
+42,Chuẩn LAN,None
+42,Chuẩn WIFI,Wi-Fi 6E(802.11ax) (Dual band) 2*2
+42,Bluetooth,Bluetooth® 5.3 Wireless Card
+42,Webcam,720p HD camera ; With privacy shutter
+42,Hệ điều hành,Windows 11 Home
+42,Pin,"50WHrs, 3S1P, 3-cell Li-ion"
+42,Trọng lượng,1.80 kg (3.97 lbs)
+42,Màu sắc,Indie Black
+42,Chất liệu,"LCD cover (Aluminum), Top case (Plastic)"
+42,Kích thước,35.86 x 24.91 x 1.89 ~ 1.89 cm
+43,CPU,"AMD Ryzen™ 7 8845HS (3.8 GHz upto 5.1 GHz, 8 nhân 16 luồng, 8 MB L2 cache, up to 16 MB L3 cache)"
+43,Ram,"16GB (1x16GB) DDR5 5600MHz (2x SO-DIMM socket, up to 32GB SDRAM)"
+43,Ổ cứng,"512GB PCIe NVMe SED SSD (Còn trống 1 khe SSD M.2 PCIE, nâng cấp tối đa 2TB)"
+43,Card đồ họa,NVIDIA® GeForce RTX™ 4050 with 6 GB of dedicated GDDR6 VRAM
+43,Màn hình,"16"" 16:10 WUXGA (1920x1200) IPS, 165Hz, 300nits, 100% sRGB,  Acer ComfyView™, LED-backlit TFT LCD, Wide viewing angle up to 170 degrees"
+43,Cổng giao tiếp," USB Type-C™ port supporting: 
+ • USB4® 40Gbps 
+ • DisplayPort over USB-C 
+ • USB charging 5 V; 3 A 
+ • DC-in port 20 V; 65 W 
+ Two USB Standard-A ports, supporting: 
+ • One port for USB 3.2 Gen 1 
+ • One port for USB 3.2 Gen 2 featuring power off USB charging HDMI® 2.1 port with HDCP support 
+ 3.5 mm headphone/speaker jack, supporting headsets with built-in microphone 
+ Ethernet (RJ-45) port "
+43,Audio,DTS® X:Ultra
+43,Bàn phím,Amber-backlit keyboard
+43,Tản nhiệt,2 quạt
+43,Chuẩn LAN,Gigabit Ethernet
+43,Chuẩn WIFI,Wi-Fi 6E Wireless LAN 
+43,Bluetooth,Bluetooth® 5.1
+43,Webcam,720p HD video at 30 fps with Temporal Noise Reduction 
+43,Hệ điều hành,Windows 11 Home Single Language
+43,Pin,4 Cell 57WHr
+43,Trọng lượng,2.5 kg
+43,Màu sắc,Obsidian black
+43,Chất liệu,"Cover A, B, C, D: Plastic"
+43,Kích thước,361.8 (W) x 278.4 (D) x 24.74/25.46 (H) mm
+44,CPU,"Intel® Core™ i9-14900HX (4.10 GHz upto 5.80 GHz, 24 nhân 32 luồng, 36MB Intel® Smart Cache)"
+44,RAM,"32GB (2x16GB) DDR5 5600MHz (2x SO-DIMM socket, up to 96GB SDRAM)"
+44,Ổ cứng,"1TB PCIe NVMe SED SSD (Còn trống 1 khe SSD M.2 PCIE Gen 4, nâng cấp tối đa 2TB SSD PCIe Gen 4)"
+44,VGA,NVIDIA® GeForce RTX™ 4070 with 8GB of dedicated GDDR6 VRAM
+44,Màn hình,"16"" WQXGA (2560 x 1600), 500 nits, 100% DCI-P3, 240Hz, Anti-glare, Acer ComfyView™ LED-backlit TFT LCD, Nvidia Advanced Optimus capable"
+44,Cổng giao tiếp,"2x USB Type-C™ port (supporting USB 3.2 Gen 2 (up to 10 Gbps); DisplayPort over USB-C; Thunderbolt™ 4; USB charging 5 V - 3 A, DC-in port 20 V - 65 W)
+1x USB 3.2 Gen 1
+1x USB 3.2 Gen 2
+1x USB 3.2 Gen 2 featuring power off USB charging
+1x HDMI® 2.1 port with HDCP support
+1x 3.5 mm headphone/speaker jack, supporting headsets with built-in microphone
+1x Ethernet (RJ-45) port
+1x DC-in jack for AC adapter
+1x MicroSD™ Card reader"
+44,Bàn phím,"Full size, RGB 4 Zone"
+44,Audio,DTS X:Ultra Audio
+44,Tản nhiệt,"Dual Fan (1x AeroBlade 3D 5th gen)
+Liquid Metal"
+44,Chuẩn LAN,Killer™ Ethernet E3100G
+44,Chuẩn WIFI,Killer Wireless Wi-Fi 6E 1675i
+44,Bluetooth,v5.3
+44,Webcam,"• Narrow USB HD camera
+• 1280 x 720 resolution
+• 720p HD video at 30 fps with Temporal Noise Reduction"
+44,Hệ điều hành,Windows 11 Home Single Language
+44,Pin,90Whr 4-cell
+44,Trọng lượng,2.8 kg
+44,Màu sắc,Obsidian black
+44,,
+44,,
+45,CPU,"AMD Ryzen™ 7 8845HS (3.8 GHz upto 5.1 GHz, 8 nhân 16 luồng, 8 MB L2 cache, up to 16 MB L3 cache)"
+45,Ram,"16GB (1x16GB) DDR5 5600MHz (2x SO-DIMM socket, up to 32GB SDRAM)"
+45,Ổ cứng,"512GB PCIe NVMe SED SSD (Còn trống 1 khe SSD M.2 PCIE, nâng cấp tối đa 2TB)"
+45,Card đồ họa,NVIDIA® GeForce RTX™ 4060 with 8 GB of dedicated GDDR6 VRAM
+45,Màn hình,"16"" 16:10 WUXGA (1920x1200) IPS, 165Hz, 300nits, 100% sRGB,  Acer ComfyView™, LED-backlit TFT LCD, Wide viewing angle up to 170 degrees"
+45,Cổng giao tiếp," USB Type-C™ port supporting: 
+ • USB4® 40Gbps 
+ • DisplayPort over USB-C 
+ • USB charging 5 V; 3 A 
+ • DC-in port 20 V; 65 W 
+ Two USB Standard-A ports, supporting: 
+ • One port for USB 3.2 Gen 1 
+ • One port for USB 3.2 Gen 2 featuring power off USB charging HDMI® 2.1 port with HDCP support 
+ 3.5 mm headphone/speaker jack, supporting headsets with built-in microphone 
+ Ethernet (RJ-45) port "
+45,Audio,DTS® X:Ultra
+45,Bàn phím,Amber-backlit keyboard
+45,Tản nhiệt,2 quạt
+45,Chuẩn LAN,Gigabit Ethernet
+45,Chuẩn WIFI,Wi-Fi 6E Wireless LAN 
+45,Bluetooth,Bluetooth® 5.1
+45,Webcam,720p HD video at 30 fps with Temporal Noise Reduction 
+45,Hệ điều hành,Windows 11 Home Single Language
+45,Pin,4 Cell 57WHr
+45,Trọng lượng,2.5 kg
+45,Màu sắc,Obsidian black
+45,Chất liệu,"Cover A, B, C, D: Plastic"
+45,Kích thước,361.8 (W) x 278.4 (D) x 24.74/25.46 (H) mm
+46,CPU,"AMD Ryzen™ 7 8845HS (3.8 GHz upto 5.1 GHz, 8 nhân 16 luồng, 8 MB L2 cache, up to 16 MB L3 cache)"
+46,Ram,"16GB (1x16GB) DDR5 5600MHz (2x SO-DIMM socket, up to 32GB SDRAM)"
+46,Ổ cứng,"512GB PCIe NVMe SED SSD (Còn trống 1 khe SSD M.2 PCIE, nâng cấp tối đa 2TB)"
+46,Card đồ họa,NVIDIA® GeForce RTX™ 3050 with 6 GB of dedicated GDDR6 VRAM
+46,Màn hình,"16"" 16:10 WUXGA (1920x1200) IPS, 165Hz, 300nits, 100% sRGB,  Acer ComfyView™, LED-backlit TFT LCD, Wide viewing angle up to 170 degrees"
+46,Cổng giao tiếp," USB Type-C™ port supporting: 
+ • USB4® 40Gbps 
+ • DisplayPort over USB-C 
+ • USB charging 5 V; 3 A 
+ • DC-in port 20 V; 65 W 
+ Two USB Standard-A ports, supporting: 
+ • One port for USB 3.2 Gen 1 
+ • One port for USB 3.2 Gen 2 featuring power off USB charging HDMI® 2.1 port with HDCP support 
+ 3.5 mm headphone/speaker jack, supporting headsets with built-in microphone 
+ Ethernet (RJ-45) port "
+46,Audio,DTS® X:Ultra
+46,Bàn phím,Amber-backlit keyboard
+46,Tản nhiệt,2 quạt
+46,Chuẩn LAN,Gigabit Ethernet
+46,Chuẩn WIFI,Wi-Fi 6E Wireless LAN 
+46,Bluetooth,Bluetooth® 5.1
+46,Webcam,720p HD video at 30 fps with Temporal Noise Reduction 
+46,Hệ điều hành,Windows 11 Home Single Language
+46,Pin,4 Cell 57WHr
+46,Trọng lượng,2.5 kg
+46,Màu sắc,Obsidian black
+46,Chất liệu,"Cover A, B, C, D: Plastic"
+46,Kích thước,361.8 (W) x 278.4 (D) x 24.74/25.46 (H) mm
+47,CPU,"AMD Ryzen™ 5 8645HS (4.3 GHz upto 5.0 GHz, 6 nhân 12 luồng, 6 MB L2 cache, up to 16 MB L3 cache)"
+47,Ram,"16GB (1x16GB) DDR5 5600MHz (2x SO-DIMM socket, up to 32GB SDRAM)"
+47,Ổ cứng,"512GB PCIe NVMe SED SSD (Còn trống 1 khe SSD M.2 PCIE, nâng cấp tối đa 2TB)"
+47,Card đồ họa,NVIDIA® GeForce RTX™ 3050 with 6 GB of dedicated GDDR6 VRAM
+47,Màn hình,"16"" 16:10 WUXGA (1920x1200) IPS, 165Hz, 300nits, 100% sRGB,  Acer ComfyView™, LED-backlit TFT LCD, Wide viewing angle up to 170 degrees"
+47,Cổng giao tiếp," USB Type-C™ port supporting: 
+ • USB4® 40Gbps 
+ • DisplayPort over USB-C 
+ • USB charging 5 V; 3 A 
+ • DC-in port 20 V; 65 W 
+ Two USB Standard-A ports, supporting: 
+ • One port for USB 3.2 Gen 1 
+ • One port for USB 3.2 Gen 2 featuring power off USB charging HDMI® 2.1 port with HDCP support 
+ 3.5 mm headphone/speaker jack, supporting headsets with built-in microphone 
+ Ethernet (RJ-45) port "
+47,Audio,DTS® X:Ultra
+47,Bàn phím,Amber-backlit keyboard
+47,Tản nhiệt,2 quạt
+47,Chuẩn LAN,Gigabit Ethernet
+47,Chuẩn WIFI,Wi-Fi 6E Wireless LAN 
+47,Bluetooth,Bluetooth® 5.1
+47,Webcam,720p HD video at 30 fps with Temporal Noise Reduction 
+47,Hệ điều hành,Windows 11 Home Single Language
+47,Pin,4 Cell 57WHr
+47,Trọng lượng,2.5 kg
+47,Màu sắc,Obsidian black
+47,Chất liệu,"Cover A, B, C, D: Plastic"
+47,Kích thước,361.8 (W) x 278.4 (D) x 24.74/25.46 (H) mm
+48,CPU,"Intel® Core™ Ultra 9 processor 185H with Intel® AI Boost (NPU) 16 cores (6 P-cores + 8 E-cores + 2 Low Power E-cores), Max Turbo Frequency 5.1 GHz"
+48,RAM,"64GB (32x2) DDR5 5600MHz (2x SO-DIMM socket, up to 96GB SDRAM)"
+48,Ổ lưu trữ,2TB SSD PCIE G4X4 (2 slots M.2 NVMe PCIe Gen4)
+48,Card đồ họa,"NVIDIA® GeForce RTX™ 4080 Laptop GPU
+Up to 2100MHz Boost Clock 150W Maximum Graphics Power with Dynamic Boost. *May vary by scenario"
+48,Màn hình,"18"" UHD+(3840x2400), Mini LED, IPS-Level, 120Hz, 100% DCI-P3(Typical), VESA DisplayHDR™ 1000 Certified"
+48,Cổng giao tiếp,"1 x Thunderbolt 4/ DP / USB Type-C (hỗ trợ sạc PD)
+1 x USB 3.2 Gen2 Type-C / DP
+2 x USB 3.2 Gen2 Type-A
+1 x HDMI 2.1 (8K@60Hz / 4K@120Hz)
+1x SD Express
+1 x Jack combo Audio
+1 x RJ45"
+48,Bàn phím,Per-Key RGB Gaming Keyboard by SteelSeries with Copilot Key
+48,Audio,"2 x 2W loa con và 4 x 2W loa trầm, thiết kế bởi Dynaudio, Nahimic 3 Audio Enhancer, hỗ trợ Hi-Res Audio"
+48,LAN,Killer Gb LAN (Up to 2.5G)
+48,Wifi + Bluetooth,"Intel® Killer™ Wi-Fi 7 BE1750, Bluetooth v5.4"
+48,Webcam,"IR FHD type (30fps@1080p) with HDR
+3D Noise Reduction+ (3DNR+)"
+48,Pin,4 Cell 99.9WHrs
+48,Trọng lượng,2.89 kg
+48,Hệ điều hành,Windows 11 Home 
+48,Màu sắc,Midnight Black
+48,Chất liệu,"A, C: Metal (MgAl), B: Plastic, D: Metal"
+48,Kích thước,399.99 x 289.67 x 19.9-23.99 mm
+49,CPU,"Snapdragon® X Elite X1E 78 100 Processor 3.4GHz (42MB Cache, up to 3.4GHz, 12 cores, 12 Threads); Qualcomm® AI Engine up to 75 total TOPs"
+49,Neural Processor,Qualcomm® Hexagon™ NPU 45TOPs
+49,RAM,32GB LPDDR5X on board 
+49,Ổ cứng,1TB M.2 NVMe™ PCIe® 4.0 SSD
+49,Intergrated GPU,Qualcomm® Adreno™ GPU
+49,Màn hình,"15.6-inch 3K (2880 x 1620) OLED 16:9, 0.2ms, 120Hz, 600nits HDR, 100% DCI-P3 color gamut, 1.07 billion colors, Glossy display, 70% less harmful blue light, TÜV Rheinland-certified, SGS Eye Care Display"
+49,Cổng giao tiếp,"""2x USB 3.2 Gen 1 Type-A
+2x USB 4.0 Gen 3 Type-C support display / power delivery
+1x HDMI 2.1 TMDS
+1x 3.5mm Combo Audio Jack
+Micro SD card reader"""
+49,Bàn phím,"Backlit Chiclet Keyboard 1-Zone RGB with Num-key
+With Copilot key"
+49,Audio,"Smart Amp Technology
+harman/kardon (Mainstream)"
+49,Voice control,with Cortana support
+49,Chuẩn LAN,None
+49,Chuẩn WIFI,Wi-Fi 7(802.11be) (Tri-band)2*2 + Bluetooth® 5.4 Wireless Card 
+49,FingerPrint,None
+49,Webcam,FHD camera with IR function to support Windows Hello ; With privacy shutter
+49,Hệ điều hành,Windows 11 Home + Microsoft Office Home & Student 2021
+49,Pin,"70WHrs, 3S1P, 3-cell Li-ion"
+49,Trọng lượng,1.42 kg
+49,Màu sắc,Cool Silver
+49,Chất liệu,"Aluminum (LCD cover, Top case, Bottom case)"
+49,Kích thước,"35.26 x 22.69 x 1.47 ~ 1.59 cm (13.88"" x 8.93"" x 0.58"" ~ 0.63"")"
