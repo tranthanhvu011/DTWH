@@ -2,7 +2,7 @@ from sqlalchemy import create_engine, Table, Column, Integer, Text, MetaData
 import json
 
 # Thiết lập kết nối tới MySQL bằng SQLAlchemy
-engine = create_engine('mysql+pymysql://root:@localhost/dtwh?charset=utf8mb4', echo=True)
+engine = create_engine('mysql+pymysql://root:@localhost/group11?charset=utf8mb4', echo=True)
 metadata = MetaData()
 
 # Định nghĩa bảng config với id và data (lưu cấu hình dưới dạng JSON)
@@ -14,17 +14,16 @@ config_table = Table('config', metadata,
 # Tạo bảng trong CSDL nếu chưa tồn tại
 metadata.create_all(engine)
 
-
 # Hàm chèn dữ liệu với cam kết thủ công và xử lý lỗi
 def insert_config_data():
     config_data = {
-        "data_dir": "/Users/thanhvu/Documents/data",
+        "data_dir": "./data",
         "products_csv": "products.csv",
         "specifications_csv": "specifications.csv",
         "images_csv": "images.csv",
         "category_url": "https://gearvn.com/collections/laptop",
-        "db_connection": "mysql+pymysql://root:@localhost/dtwh?charset=utf8mb4",
-        "chromedriver_path": "/Users/thanhvu/Downloads/chromedriver-mac-arm64/chromedriver"
+        "db_connection": "mysql+pymysql://root:@localhost/group11?charset=utf8mb4",
+        "chromedriver_path": "./chromedriver-mac-arm64/chromedriver"
     }
     json_data = json.dumps(config_data)
 
@@ -47,17 +46,15 @@ def insert_config_data():
     finally:
         conn.close()  # Đóng kết nối
 
-
 # Hàm kiểm tra dữ liệu
 def check_config_data():
     with engine.connect() as conn:
         result = conn.execute(config_table.select()).fetchone()
         if result:
-            config_data = json.loads(result['data'])
+            config_data = json.loads(result[1])  # Truy cập giá trị bằng chỉ mục số
             print("Dữ liệu trong bảng config:", config_data)
         else:
             print("Bảng config không có dữ liệu.")
-
 
 # Gọi hàm chèn và kiểm tra dữ liệu
 insert_config_data()
