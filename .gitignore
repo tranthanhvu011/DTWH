@@ -1,5 +1,5 @@
 /.idea
 /.venv
-config.ini
+/config.ini
 /__pycache__
 /data/history
