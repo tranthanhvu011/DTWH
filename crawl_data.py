@@ -10,7 +10,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 import signal
 import sys
-engine = create_engine('mysql+pymysql://root:@localhost/dtwh?charset=utf8mb4', echo=True)
+engine = create_engine('mysql+pymysql://root:@localhost/group11?charset=utf8mb4', echo=True)
 Session = sessionmaker(bind=engine)
 metadata = MetaData()
 
