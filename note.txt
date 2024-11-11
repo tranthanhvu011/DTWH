@@ -1,0 +1,2 @@
+cd D:/WareHouse/DTWH               
+>> .venv/Scripts/activate
