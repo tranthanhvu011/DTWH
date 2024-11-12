@@ -11,24 +11,34 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from sqlalchemy import select
 
+# Adjust the path for db_config import
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
 from db_config import DbConfig
 
 class CrawlData:
     def __init__(self):
+        # Initialize database and configurations
         self.db_config = DbConfig()
         self.engine = create_engine('mysql+pymysql://root:@localhost/group11?charset=utf8mb4', echo=True)
         self.Session = sessionmaker(bind=self.engine)
         self.metadata = MetaData()
         self.config_table, self.logs_table = self._define_tables()
+        
+        # Create tables and insert configuration
         self.metadata.create_all(self.engine)
+        self.insert_config()
+        
+        # Load configuration data
         self.config = self.get_config_data()
+        
+        # Initialize Selenium WebDriver
         self.driver = self._init_driver()
+        
+        # Register signals for graceful termination
         self._register_signals()
 
     def _define_tables(self):
-        # Định nghĩa bảng config và logs
+        # Define config and logs tables
         config_table = Table('config', self.metadata,
             Column('id', Integer, primary_key=True, autoincrement=True),
             Column('data_dir', String(255)),
@@ -54,6 +64,7 @@ class CrawlData:
         return config_table, logs_table
 
     def _init_driver(self):
+        # Initialize Chrome WebDriver with options
         chrome_options = Options()
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('--disable-dev-shm-usage')
@@ -61,43 +72,53 @@ class CrawlData:
         return webdriver.Chrome(service=Service(self.db_config.chromedriver_path), options=chrome_options)
 
     def _register_signals(self):
+        # Register signal handlers for graceful exit
         signal.signal(signal.SIGINT, self._handle_termination_signal)
         signal.signal(signal.SIGTERM, self._handle_termination_signal)
 
     def get_config_data(self):
+        # Retrieve config data from the config table
         with self.engine.connect() as conn:
-            result = conn.execute(self.config_table.select()).mappings().fetchone()
+            result = conn.execute(select(self.config_table)).mappings().fetchone()
             if result:
                 return dict(result)
             else:
-                raise ValueError("Không tìm thấy cấu hình trong bảng config.")
+                raise ValueError("Configuration not found in the config table.")
 
     def insert_config(self): 
-        with self.engine.connect() as conn: 
-            conn.execute(self.config_table.insert().values(
-            data_dir=self.db_config.data_dir, 
-            products_csv=self.db_config.products_csv, 
-            specifications_csv=self.db_config.specifications_csv, 
-            images_csv=self.db_config.images_csv, 
-            category_url=self.db_config.category_url, 
-            db_connection=self.db_config.db_connection, 
-            chromedriver_path=self.db_config.chromedriver_path, 
-            user=self.db_config.db_user 
-            ))
-    def _handle_termination_signal(self, signal_number, frame):
-        self.write_log("End Crawl", "Kết thúc crawl bất thường", "Failed")
-        self.driver.quit()
-        print("Crawl bị dừng đột ngột.")
-        sys.exit(1)
-    def get_config_id(self, user):
-            with self.engine.begin() as conn:
-                result = conn.execute(
-                    select(self.config_table.c.id)
-                    .where(self.config_table.c.user == user)
-                ).mappings().fetchone()
+        # Insert config data only if it doesn't already exist
+        with self.engine.connect() as conn:
+            result = conn.execute(select(self.config_table.c.id)).fetchone()
+            if not result:
+                conn.execute(self.config_table.insert().values(
+                    data_dir=self.db_config.data_dir,
+                    products_csv=self.db_config.products_csv,
+                    specifications_csv=self.db_config.specifications_csv,
+                    images_csv=self.db_config.images_csv,
+                    category_url=self.db_config.category_url,
+                    db_connection=self.db_config.db_connection,
+                    chromedriver_path=self.db_config.chromedriver_path,
+                    user=self.db_config.db_user
+                ))
+                conn.commit()  # Commit after insertion
 
-                return result['id'] if result else 1
+    def _handle_termination_signal(self, signal_number, frame):
+        # Handle process termination gracefully
+        self.write_log("End Crawl", "Unexpected crawl termination", "Failed")
+        self.driver.quit()
+        print("Crawl was stopped abruptly.")
+        sys.exit(1)
+
+    def get_config_id(self, user):
+        # Get config ID for the specified user
+        with self.engine.connect() as conn:
+            result = conn.execute(
+                select(self.config_table.c.id).where(self.config_table.c.user == user)
+            ).mappings().fetchone()
+            return result['id'] if result else None
+
     def write_log(self, action, details, status="Success"):
+        # Write a log entry into the logs table
         timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
         new_log = self.logs_table.insert().values(
             config_id=self.get_config_id(self.db_config.db_user),
@@ -111,9 +132,9 @@ class CrawlData:
             conn.execute(new_log)
 
     def start_crawling(self):
+        # Start the crawling process
         try:
-            self.insert_config()  # Insert config trước khi bắt đầu crawling
-            self.write_log("Start Crawl", "Bắt đầu crawl")
+            self.write_log("Start Crawl", "Starting crawl")
             self.driver.get(self.config['category_url'])
             time.sleep(5)
             product_links = [elem.get_attribute('href') for elem in self.driver.find_elements(By.CSS_SELECTOR, '.proloop .proloop-name a')]
@@ -122,10 +143,11 @@ class CrawlData:
         except Exception as e:
             self.write_log("Crawl Failed", str(e), "Failed")
         finally:
-            self.write_log("End Crawl", "Kết thúc crawl")
+            self.write_log("End Crawl", "Crawl completed")
             self.driver.quit()
 
     def _crawl_products(self, product_links):
+        # Crawl product details
         products, specs, images = [], [], []
         new_products = 0
         for link in product_links:
@@ -143,6 +165,7 @@ class CrawlData:
         return products, specs, images
 
     def _get_product_info(self):
+        # Extract product information
         try:
             price = self._clean_price(self.driver.find_element(By.CSS_SELECTOR, '.product-price .pro-price').text)
             discounted_price = self._clean_price(self.driver.find_element(By.CSS_SELECTOR, '.product-price del').text)
@@ -153,6 +176,7 @@ class CrawlData:
         return price, discounted_price, discount_percent, thumb_image
 
     def _get_specifications(self, product_id):
+        # Get specifications from product page
         specs = []
         try:
             specs_table = self.driver.find_element(By.ID, 'tblGeneralAttribute')
@@ -165,6 +189,7 @@ class CrawlData:
         return specs
 
     def _get_images(self, product_id):
+        # Get additional images for the product
         images = []
         try:
             for image in self.driver.find_elements(By.CSS_SELECTOR, '.product-gallery--photo a'):
@@ -174,14 +199,16 @@ class CrawlData:
         return images
 
     def _save_to_csv(self, products, specs, images):
+        # Save data to CSV files
         data_dir = self.config['data_dir']
         os.makedirs(data_dir, exist_ok=True)
         self._write_csv(os.path.join(data_dir, self.config['products_csv']), products, ['id', 'product_name', 'price', 'discounted_price', 'discount_percent', 'thumb_image'])
         self._write_csv(os.path.join(data_dir, self.config['specifications_csv']), specs, ['product_id', 'spec_name', 'spec_value'])
         self._write_csv(os.path.join(data_dir, self.config['images_csv']), images, ['product_id', 'image_url'])
-        self.write_log("Crawl Completed", f"Thêm {len(products)} sản phẩm mới")
+        self.write_log("Crawl Completed", f"Added {len(products)} new products")
 
     def _write_csv(self, file_path, data, headers):
+        # Write data to CSV with headers
         with open(file_path, mode='a', newline='', encoding='utf-8') as file:
             writer = csv.writer(file)
             if os.stat(file_path).st_size == 0:
@@ -189,6 +216,7 @@ class CrawlData:
             writer.writerows(data)
 
     def product_exists(self, product_name):
+        # Check if product already exists in products CSV
         products_csv = os.path.join(self.config['data_dir'], self.config['products_csv'])
         if not os.path.exists(products_csv):
             return False

@@ -10,7 +10,7 @@ class TestCrawlData:
         self.crawl_data = CrawlData()
 
     def run_tests(self):
-        self.crawl_data.start_crawling()
+        self.crawl_data.start_crawling();
         print("Crawl completed.")
 
 if __name__ == "__main__":
