@@ -212,25 +212,35 @@ class StagingData:
         product_id = self._convert_to_int(image['product_id'])
         image_url = image['image_url']
 
-        existing_images = conn.execute(
-            self.images_table.select().where(self.images_table.c.product_id == product_id)
-        ).mappings().fetchall()
-
-        for existing in existing_images:
-            if existing['image_url'] != image_url:
-                conn.execute(
-                    self.images_table.update()
-                    .where(self.images_table.c.product_id == product_id)
-                    .values(image_url=image_url)
-                )
-                return 'updated'
-
-        # If no existing image matched, insert a new image
+        # Insert trực tiếp mà không cần kiểm tra sự trùng lặp của product_id
         result = conn.execute(self.images_table.insert().values(
             product_id=product_id,
             image_url=image_url
         ))
         return 'inserted' if result.inserted_primary_key else None
+
+        # product_id = self._convert_to_int(image['product_id'])
+        # image_url = image['image_url']
+
+        # existing_images = conn.execute(
+        #     self.images_table.select().where(self.images_table.c.product_id == product_id)
+        # ).mappings().fetchall()
+
+        # for existing in existing_images:
+        #     if existing['image_url'] != image_url:
+        #         conn.execute(
+        #             self.images_table.update()
+        #             .where(self.images_table.c.product_id == product_id)
+        #             .values(image_url=image_url)
+        #         )
+        #         return 'updated'
+
+        # # If no existing image matched, insert a new image
+        # result = conn.execute(self.images_table.insert().values(
+        #     product_id=product_id,
+        #     image_url=image_url
+        # ))
+        # return 'inserted' if result.inserted_primary_key else None
 
     def process_specification(self, conn, spec):
         product_id = self._convert_to_int(spec['product_id'])
