@@ -2,9 +2,8 @@ import csv
 import os
 import sys
 import time
-import shutil
-import datetime
-from sqlalchemy import create_engine, Table, Column, Integer, String, Float, Text, MetaData, ForeignKey
+from datetime import datetime
+from sqlalchemy import create_engine, Table, Column, Integer, String, Float, Text, MetaData, ForeignKey, Date, func, PrimaryKeyConstraint
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.exc import OperationalError
@@ -34,12 +33,32 @@ class LoadWarehouse:
         except Exception as e:
             
             products_table = Table('products', metadata,
-                Column('id', Integer, primary_key=True, autoincrement=True),
-                Column('product_name', String(255), unique=True),
+                Column('id', Integer, autoincrement=True),
+                Column('product_name', String(255)),
                 Column('price', Float),
                 Column('discounted_price', Float),
                 Column('discount_percent', Float),
-                Column('thumb_image', String(255))
+                Column('thumb_image', String(255)),
+                Column('date_update', Integer),
+                Column('sk', Integer),
+                PrimaryKeyConstraint('id', 'sk')
+            )
+            metadata.create_all(engine)
+
+        try:
+            
+            dim_date = Table('dim_dates', metadata, autoload_with=engine, autoload=True)
+        except Exception as e:
+            
+            dim_date = Table('dim_dates', metadata,
+                Column('id', Integer, primary_key=True, autoincrement=True),
+                Column('full_date', Date),
+                Column('day', Integer),
+                Column('month', Integer),
+                Column('year', Integer),
+                Column('month_year', String(255)),
+                Column('week_of_year', Integer),
+                Column('day_name', String(255)),
             )
             metadata.create_all(engine)
 
@@ -51,7 +70,8 @@ class LoadWarehouse:
             images_table = Table('images', metadata,
                 Column('id', Integer, primary_key=True, autoincrement=True),
                 Column('product_id', Integer, ForeignKey('products.id')),
-                Column('image_url', String(255))
+                Column('image_url', String(255)),
+                Column('sk', Integer)
             )
             metadata.create_all(engine)
 
@@ -64,7 +84,8 @@ class LoadWarehouse:
                 Column('id', Integer, primary_key=True, autoincrement=True),
                 Column('product_id', Integer, ForeignKey('products.id')),
                 Column('spec_name', String(255)),
-                Column('spec_value', String(255))
+                Column('spec_value', String(255)),
+                Column('sk', Integer)
             )
             metadata.create_all(engine)
         
@@ -148,8 +169,41 @@ class LoadWarehouse:
             return True
         else:
             return False
+
+    def insert_current_date_into_dim_dates(self, conn_warehouse, dim_date_table):
+        current_time = datetime.now()
+    
+        check_stmt = select(dim_date_table.c.id).where(dim_date_table.c.full_date == current_time.date())
+        existing_date = conn_warehouse.execute(check_stmt).fetchone()
+
+        if existing_date:
+            return existing_date[0]
+        else:
+            insert_stmt = dim_date_table.insert().values(
+                full_date=current_time,
+                day=current_time.day,
+                month=current_time.month,
+                year=current_time.year,
+                month_year=f"{current_time.month}-{current_time.year}",
+                week_of_year=current_time.isocalendar()[1],  
+                day_name=current_time.strftime('%A')        
+            )
+
+            result = conn_warehouse.execute(insert_stmt)
+            conn_warehouse.commit()
         
+            inserted_id = result.inserted_primary_key[0]
+            return inserted_id
+
     def insert_data_to_warehouse(self, conn_control, conn_warehouse):
+
+        dim_date = Table('dim_dates', self.metadata, autoload_with=conn_warehouse)
+        warehouse_products_table = Table('products', self.metadata, autoload_with=conn_warehouse)
+        print(warehouse_products_table.columns.keys)
+        warehouse_images_table = Table('images', self.metadata, autoload_with=conn_warehouse)
+        warehouse_specifications_table = Table('specifications', self.metadata, autoload_with=conn_warehouse)
+        id_dim_date = self.insert_current_date_into_dim_dates(conn_warehouse, dim_date)
+
         products_table = Table('products', self.metadata, autoload_with=conn_control)
         images_table = Table('images', self.metadata, autoload_with=conn_control)
         specifications_table = Table('specifications', self.metadata, autoload_with=conn_control)
@@ -164,54 +218,101 @@ class LoadWarehouse:
             products_table.c.thumb_image
         )
         products_data = conn_control.execute(stmt_products).fetchall()
-
-        stmt_images = select(
-            images_table.c.id, 
-            images_table.c.product_id, 
-            images_table.c.image_url
-        )
-        images_data = conn_control.execute(stmt_images).fetchall()
-
-        stmt_specifications = select(
-            specifications_table.c.id, 
-            specifications_table.c.product_id, 
-            specifications_table.c.spec_name, 
-            specifications_table.c.spec_value
-        )
-        specifications_data = conn_control.execute(stmt_specifications).fetchall()
-
         
-        warehouse_products_table = Table('products', self.metadata, autoload_with=conn_warehouse)
-        warehouse_images_table = Table('images', self.metadata, autoload_with=conn_warehouse)
-        warehouse_specifications_table = Table('specifications', self.metadata, autoload_with=conn_warehouse)
-
-        
+        count_product = 0
         for product in products_data:
-            insert_stmt = warehouse_products_table.insert().values(
-                product_name=product[1],
-                price=product[2],
-                discounted_price=product[3],
-                discount_percent=product[4],
-                thumb_image=product[5]
-            )
-            conn_warehouse.execute(insert_stmt)
-        
-    
-        for image in images_data:
-            insert_stmt = warehouse_images_table.insert().values(
-                product_id=image[1],
-                image_url=image[2]
-            )
-            conn_warehouse.execute(insert_stmt)
+            # Bước 9.1. Check the data exists.
+            check_stmt = select(warehouse_products_table.c.id, func.coalesce(func.max(warehouse_products_table.c.sk), 0)
+                                ).where(warehouse_products_table.c.product_name == product[1]
+                                        ).group_by(warehouse_products_table.c.id)
+            existing_products = conn_warehouse.execute(check_stmt).fetchall()
 
-        for specification in specifications_data:
-            insert_stmt = warehouse_specifications_table.insert().values(
-                product_id=specification[1],
-                spec_name=specification[2],
-                spec_value=specification[3]
+            # Lấy dữ liệu từ bảng images theo product_id
+            stmt_images = select(
+                images_table.c.id, 
+                images_table.c.product_id, 
+                images_table.c.image_url
+            ).where(
+                images_table.c.product_id == product[0] 
             )
-            conn_warehouse.execute(insert_stmt)
+
+            images_data = conn_control.execute(stmt_images).fetchall()
+
+            # Lấy dữ liệu từ bảng specifications theo product_id
+            stmt_specifications = select(
+                specifications_table.c.id, 
+                specifications_table.c.product_id, 
+                specifications_table.c.spec_name, 
+                specifications_table.c.spec_value
+            ).where(
+                specifications_table.c.product_id == product[0]
+            )
+            specifications_data = conn_control.execute(stmt_specifications).fetchall()
+
+            if existing_products:
+                # Bước 9.3 Insert data to Warehouse with sk increase 1
+                product_id = existing_products[0][0]
+                sk = existing_products[0][1] + 1
+                insert_stmt = warehouse_products_table.insert().values(
+                    id = product_id,
+                    product_name=product[1],
+                    price=product[2],
+                    discounted_price=product[3],
+                    discount_percent=product[4],
+                    thumb_image=product[5],
+                    sk=sk,
+                    date_update=id_dim_date,
+                )
+                conn_warehouse.execute(insert_stmt)
+                
+                for images in images_data:
+                    insert_stmt = warehouse_images_table.insert().values(
+                        product_id = product_id,
+                        image_url = images[2],
+                        sk = sk,
+                    )
+                    conn_warehouse.execute(insert_stmt)
+                for specifications in specifications_data:
+                    insert_stmt = warehouse_specifications_table.insert().values(
+                        product_id = product_id,
+                        spec_name = specifications[2],
+                        spec_value = specifications[3],
+                        sk = sk
+                    )
+                    conn_warehouse.execute(insert_stmt)
+                
+            else:
+                # Bước 9.2 Insert data to Warehouse
+                insert_stmt = warehouse_products_table.insert().values(
+                    product_name=product[1],
+                    price=product[2],
+                    discounted_price=product[3],
+                    discount_percent=product[4],
+                    thumb_image=product[5],
+                    sk=1,
+                    date_update=id_dim_date,
+                )
+                result = conn_warehouse.execute(insert_stmt)
+                product_id = result.inserted_primary_key[0]
+                
+                for images in images_data:
+                    insert_stmt = warehouse_images_table.insert().values(
+                        product_id = product_id,
+                        image_url = images[2],
+                        sk = 1,
+                    )
+                    conn_warehouse.execute(insert_stmt)
+                for specifications in specifications_data:
+                    insert_stmt = warehouse_specifications_table.insert().values(
+                        product_id = product_id,
+                        spec_name = specifications[2],
+                        spec_value = specifications[3],
+                        sk = 1,
+                    )
+                    conn_warehouse.execute(insert_stmt)
+            count_product+=1
         conn_warehouse.commit()
+        return count_product
 
     def start_load_warehouse(self):
         # Bước 1. Connect Database Control
@@ -225,12 +326,12 @@ class LoadWarehouse:
         
         # Bước 3. Check data is avaible in Staging 
         if (self.check_staging_data(conn=control_session.connection()) == False):
-            print("Check data is avaible in Staging ")
+            print("data is not avaible in Staging ")
             return
         
         # Bước 4. Check data has been loaded from Staging to Warehouse
         if (self.check_data_warehouse(conn=control_session.connection())):
-            print(" Check data has been loaded from Staging to Warehouse")
+            print("Data has been loaded from Staging to Warehouse")
             return
         
         # Bước 5. 
@@ -247,8 +348,13 @@ class LoadWarehouse:
             self.write_log(conn=control_session.connection(), action="Load data to Warehouse", details="Failed to connect to Warehouse", status="Error", config_id=2)
             return
         # Bước 9. Load data from Staging to Warehouse
-        self.insert_data_to_warehouse(conn_control=control_session.connection(), conn_warehouse= data_warehouse_session.connection())
-        self.write_log(conn=control_session.connection(), action="Load data to Warehouse", details="Load data from Staging to Warehouse", status="Success", config_id=2)
+        total_product = self.insert_data_to_warehouse(conn_control=control_session.connection(), conn_warehouse= data_warehouse_session.connection())
 
+        # Bước 10. Insert new row table logs  
+        self.write_log(conn=control_session.connection(), action="Load data to Warehouse", details=f"Load data from Staging to Warehouse: {total_product} products have been added.", status="Success", config_id=2)
+
+        # Bước 11. Close all connect to database
+        control_session.close()
+        data_warehouse_session.close()
 if __name__ == "__main__":
     warehouse = LoadWarehouse()
