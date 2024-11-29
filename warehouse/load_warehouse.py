@@ -71,7 +71,6 @@ class LoadWarehouse:
                 Column('id', Integer, primary_key=True, autoincrement=True),
                 Column('product_id', Integer, ForeignKey('products.id')),
                 Column('image_url', String(255)),
-                Column('sk', Integer)
             )
             metadata.create_all(engine)
 
@@ -85,7 +84,6 @@ class LoadWarehouse:
                 Column('product_id', Integer, ForeignKey('products.id')),
                 Column('spec_name', String(255)),
                 Column('spec_value', String(255)),
-                Column('sk', Integer)
             )
             metadata.create_all(engine)
         
@@ -199,7 +197,6 @@ class LoadWarehouse:
 
         dim_date = Table('dim_dates', self.metadata, autoload_with=conn_warehouse)
         warehouse_products_table = Table('products', self.metadata, autoload_with=conn_warehouse)
-        print(warehouse_products_table.columns.keys)
         warehouse_images_table = Table('images', self.metadata, autoload_with=conn_warehouse)
         warehouse_specifications_table = Table('specifications', self.metadata, autoload_with=conn_warehouse)
         id_dim_date = self.insert_current_date_into_dim_dates(conn_warehouse, dim_date)
@@ -222,7 +219,7 @@ class LoadWarehouse:
         count_product = 0
         for product in products_data:
             # Bước 9.1. Check the data exists.
-            check_stmt = select(warehouse_products_table.c.id, func.coalesce(func.max(warehouse_products_table.c.sk), 0)
+            check_stmt = select(warehouse_products_table.c.id, warehouse_products_table.c.price, func.coalesce(func.max(warehouse_products_table.c.sk), 0)
                                 ).where(warehouse_products_table.c.product_name == product[1]
                                         ).group_by(warehouse_products_table.c.id)
             existing_products = conn_warehouse.execute(check_stmt).fetchall()
@@ -250,10 +247,12 @@ class LoadWarehouse:
             specifications_data = conn_control.execute(stmt_specifications).fetchall()
 
             if existing_products:
-                # Bước 9.3 Insert data to Warehouse with sk increase 1
-                product_id = existing_products[0][0]
-                sk = existing_products[0][1] + 1
-                insert_stmt = warehouse_products_table.insert().values(
+                # Bước 9.3 Check product has changed price
+                if product[2] != existing_products[0][2]:
+                    # Bước 9.4 Insert data to Warehouse with sk increase 1
+                    product_id = existing_products[0][0]
+                    sk = existing_products[0][2] + 1
+                    insert_stmt = warehouse_products_table.insert().values(
                     id = product_id,
                     product_name=product[1],
                     price=product[2],
@@ -262,25 +261,8 @@ class LoadWarehouse:
                     thumb_image=product[5],
                     sk=sk,
                     date_update=id_dim_date,
-                )
-                conn_warehouse.execute(insert_stmt)
-                
-                for images in images_data:
-                    insert_stmt = warehouse_images_table.insert().values(
-                        product_id = product_id,
-                        image_url = images[2],
-                        sk = sk,
                     )
                     conn_warehouse.execute(insert_stmt)
-                for specifications in specifications_data:
-                    insert_stmt = warehouse_specifications_table.insert().values(
-                        product_id = product_id,
-                        spec_name = specifications[2],
-                        spec_value = specifications[3],
-                        sk = sk
-                    )
-                    conn_warehouse.execute(insert_stmt)
-                
             else:
                 # Bước 9.2 Insert data to Warehouse
                 insert_stmt = warehouse_products_table.insert().values(
@@ -299,7 +281,6 @@ class LoadWarehouse:
                     insert_stmt = warehouse_images_table.insert().values(
                         product_id = product_id,
                         image_url = images[2],
-                        sk = 1,
                     )
                     conn_warehouse.execute(insert_stmt)
                 for specifications in specifications_data:
@@ -307,7 +288,6 @@ class LoadWarehouse:
                         product_id = product_id,
                         spec_name = specifications[2],
                         spec_value = specifications[3],
-                        sk = 1,
                     )
                     conn_warehouse.execute(insert_stmt)
             count_product+=1
