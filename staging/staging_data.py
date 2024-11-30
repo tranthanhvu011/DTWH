@@ -4,22 +4,23 @@ import sys
 import time
 import shutil
 import datetime
-from sqlalchemy import create_engine, Table, Column, Integer, String, Float, Text, MetaData, ForeignKey
+from sqlalchemy import create_engine, Table, Column, Integer, String, Float, MetaData, ForeignKey
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy import select
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from db_config import DbConfig
+from db_config import Control
 
 class StagingData:
     def __init__(self):
-        self.db_config = DbConfig()
-        self.engine = create_engine(self.db_config.db_connection, echo=True)
-        self.Session = sessionmaker(bind=self.engine)
+        self.control = Control()
+        self.db_config = self.control.db_config
+        self.engine_staging = create_engine(self.db_config.db_connection_staging, echo=True)
+        self.Session = sessionmaker(bind=self.engine_staging)
         self.metadata = MetaData()
-        self.products_table, self.logs_table, self.config_table, self.images_table, self.specifications_table = self._define_tables()
-        self.metadata.create_all(self.engine)
+        self.products_table, self.images_table, self.specifications_table = self._define_tables()
+        self.metadata.create_all(self.engine_staging)
 
     def _define_tables(self):
         products_table = Table('products', self.metadata,
@@ -31,28 +32,6 @@ class StagingData:
                                Column('thumb_image', String(255))
                                )
         
-        logs_table = Table('logs', self.metadata,
-                           Column('id', Integer, primary_key=True, autoincrement=True),
-                           Column('config_id', Integer),
-                           Column('timestamp', String(50)),
-                           Column('action', String(50)),
-                           Column('details', String(500)),
-                           Column('process', String(50)),
-                           Column('status', String(50))
-                           )
-        
-        config_table = Table('config', self.metadata,
-            Column('id', Integer, primary_key=True, autoincrement=True),
-            Column('data_dir', String(255)),
-            Column('products_csv', String(255)),
-            Column('specifications_csv', String(255)),
-            Column('images_csv', String(255)),
-            Column('category_url', Text),
-            Column('db_connection', Text),
-            Column('chromedriver_path', String(255)),
-            Column('user', String(50))
-        )
-
         images_table = Table('images', self.metadata,
                              Column('id', Integer, primary_key=True, autoincrement=True),
                              Column('product_id', Integer, ForeignKey('products.id')),
@@ -66,15 +45,11 @@ class StagingData:
                                      Column('spec_value', String(255))
                                     )
         
-        return products_table, logs_table, config_table, images_table, specifications_table
+        return products_table, images_table, specifications_table
 
-    def get_config_id(self, user):
-        with self.engine.begin() as conn:
-            result = conn.execute(
-                select(self.config_table.c.id)
-                .where(self.config_table.c.user == user)
-            ).mappings().fetchone()
-        return result['id'] if result else 1
+    def check_files_exist(self, files):
+        missing_files = [file for file in files if not os.path.exists(file)]
+        return missing_files
 
     def staging_data(self):
         data_dir = self.db_config.data_dir
@@ -82,44 +57,49 @@ class StagingData:
         images_csv = os.path.join(data_dir, self.db_config.images_csv)
         specifications_csv = os.path.join(data_dir, self.db_config.specifications_csv)
 
-        # Thư mục history (tạo thư mục nếu chưa có)
         history_dir = os.path.join(data_dir, 'history')
         if not os.path.exists(history_dir):
             os.makedirs(history_dir)
 
-        with self.engine.begin() as conn:
-            # Start staging log
-            self.write_log(conn, "Start Staging", "Starting the staging process", "In Progress")
+        try:
+            files = [products_csv, images_csv, specifications_csv]
+            missing_files = self.check_files_exist(files)
+            if missing_files:
+                error_message = f"Missing files: {', '.join(missing_files)}"
+                print(error_message)
+                self.control.write_log("File Check", error_message, "Error")
+                return
 
-            # Process all data types (products, images, specifications) in one unified function
+            self.control.write_log("Start Staging", "Starting the staging process", "In Progress")
+
             records = self.read_all_csv(products_csv, images_csv, specifications_csv)
-            inserted, updated, errors = self.process_staging_data(conn, records)
+            inserted, updated, errors = self.process_staging_data(records)
 
-            # Log staging summary
-            self.write_log(conn, "Staging Summary",
-                        f"Inserted: {inserted}, Updated: {updated}, Errors: {errors}",
-                        "Completed" if errors == 0 else "Partial Success")
+            self.control.write_log("Staging Summary",
+                                   f"Inserted: {inserted}, Updated: {updated}, Errors: {errors}",
+                                   "Completed" if errors == 0 else "Partial Success")
 
-            # Di chuyển các file CSV đã staging thành công vào thư mục history
             self.move_file_to_history(products_csv)
             self.move_file_to_history(images_csv)
             self.move_file_to_history(specifications_csv)
 
-            # End staging log
-            self.write_log(conn, "End Staging", "Staging process completed", "Completed")
+        except Exception as e:
+            error_message = f"Error during staging process: {str(e)}"
+            print(error_message)
+            self.control.write_log("Error", error_message, "Error")
+
+        finally:
+            self.control.write_log("End Staging", "Staging process completed", "Completed")
 
     def move_file_to_history(self, file_path):
         if os.path.exists(file_path):
-            # Lấy ngày hiện tại để thêm vào tên file
             current_date = datetime.datetime.now().strftime('%Y%m%d')
             filename = os.path.basename(file_path)
-            new_filename = f"{filename.split('.')[0]}{current_date}.csv"
+            new_filename = f"{filename.split('.')[0]}_{current_date}.csv"
             new_file_path = os.path.join(os.path.dirname(file_path), 'history', new_filename)
 
-            # Di chuyển và đổi tên file
             shutil.move(file_path, new_file_path)
             print(f"File {filename} moved to history with new name {new_filename}")
-
 
     def read_all_csv(self, products_csv, images_csv, specifications_csv):
         records = {
@@ -127,49 +107,47 @@ class StagingData:
             'images': [],
             'specifications': []
         }
-        
+
         with open(products_csv, mode='r', encoding='utf-8') as file:
             records['products'] = list(csv.DictReader(file))
-        
+
         with open(images_csv, mode='r', encoding='utf-8') as file:
             records['images'] = list(csv.DictReader(file))
-        
+
         with open(specifications_csv, mode='r', encoding='utf-8') as file:
             records['specifications'] = list(csv.DictReader(file))
-        
+
         return records
 
-    def process_staging_data(self, conn, records):
+    def process_staging_data(self, records):
         inserted, updated, errors = 0, 0, 0 
 
-        for category, rows in records.items():
-            for row in rows:
-                try:
-                    if category == 'products':
-                        result = self.process_product(conn, row)
-                    elif category == 'images':
-                        result = self.process_image(conn, row)
-                    elif category == 'specifications':
-                        result = self.process_specification(conn, row)
+        with self.engine_staging.begin() as conn:
+            for category, rows in records.items():
+                for row in rows:
+                    try:
+                        if category == 'products':
+                            result = self.process_product(conn, row)
+                        elif category == 'images':
+                            result = self.process_image(conn, row)
+                        elif category == 'specifications':
+                            result = self.process_specification(conn, row)
 
-                    # Handle result to check if there's a new insert, update, or no action
-                    if result == 'inserted':
-                        inserted += 1  # Tăng số lượng bản ghi được insert
-                    elif result == 'updated':
-                        updated += 1  # Tăng số lượng bản ghi được update
+                        if result == 'inserted':
+                            inserted += 1
+                        elif result == 'updated':
+                            updated += 1
 
-                except SQLAlchemyError as e:
-                    errors += 1  # Tăng số lượng bản ghi bị lỗi
-                    self.write_log(conn, f"Insert/Update {category}", f"Failed to insert/update {category} due to {str(e)}", "Failed")
-                    print(f"Failed to insert/update {category} due to {str(e)}")
+                    except SQLAlchemyError as e:
+                        errors += 1
+                        self.write_log(f"Insert/Update {category}", f"Failed to insert/update {category} due to {str(e)}", "Failed")
+                        print(f"Failed to insert/update {category} due to {str(e)}")
 
-        # Ghi log chỉ số lượng bản ghi đã insert, update và errors
-        self.write_log(conn, "Staging Summary",
-                    f"Inserted: {inserted}, Updated: {updated}, Errors: {errors}",
-                    "Completed" if errors == 0 else "Partial Success")
+        self.write_log("Staging Summary",
+                        f"Inserted: {inserted}, Updated: {updated}, Errors: {errors}",
+                        "Completed" if errors == 0 else "Partial Success")
 
         return inserted, updated, errors 
-
 
     def process_product(self, conn, product):
         price = self._convert_to_float(product['price'])
@@ -182,14 +160,13 @@ class StagingData:
         ).mappings().fetchone()
 
         if existing_product:
-            # Check if there are any changes to update
             if (existing_product['price'] != price or
                 existing_product['discounted_price'] != discounted_price or
                 existing_product['discount_percent'] != discount_percent or
                 existing_product['thumb_image'] != thumb_image):
                 conn.execute(
                     self.products_table.update()
-                    .where(self.products_table.c.id == existing_product['id'])  # Using id for update
+                    .where(self.products_table.c.id == existing_product['id'])
                     .values(
                         price=price,
                         discounted_price=discounted_price,
@@ -212,35 +189,11 @@ class StagingData:
         product_id = self._convert_to_int(image['product_id'])
         image_url = image['image_url']
 
-        # Insert trực tiếp mà không cần kiểm tra sự trùng lặp của product_id
         result = conn.execute(self.images_table.insert().values(
             product_id=product_id,
             image_url=image_url
         ))
         return 'inserted' if result.inserted_primary_key else None
-
-        # product_id = self._convert_to_int(image['product_id'])
-        # image_url = image['image_url']
-
-        # existing_images = conn.execute(
-        #     self.images_table.select().where(self.images_table.c.product_id == product_id)
-        # ).mappings().fetchall()
-
-        # for existing in existing_images:
-        #     if existing['image_url'] != image_url:
-        #         conn.execute(
-        #             self.images_table.update()
-        #             .where(self.images_table.c.product_id == product_id)
-        #             .values(image_url=image_url)
-        #         )
-        #         return 'updated'
-
-        # # If no existing image matched, insert a new image
-        # result = conn.execute(self.images_table.insert().values(
-        #     product_id=product_id,
-        #     image_url=image_url
-        # ))
-        # return 'inserted' if result.inserted_primary_key else None
 
     def process_specification(self, conn, spec):
         product_id = self._convert_to_int(spec['product_id'])
@@ -271,17 +224,9 @@ class StagingData:
             ))
             return 'inserted' if result.inserted_primary_key else None
 
-
-    def write_log(self, conn, action, details, status):
+    def write_log(self, action, details, status):
         timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
-        conn.execute(self.logs_table.insert().values(
-            config_id=self.get_config_id(self.db_config.db_user),
-            timestamp=timestamp,
-            action=action,
-            details=details,
-            process='staging',
-            status=status,
-        ))
+        self.control.write_log(action, details, status)  
 
     @staticmethod
     def _convert_to_float(value):
@@ -296,9 +241,3 @@ class StagingData:
             return int(value)
         except ValueError:
             return None
-
-if __name__ == "__main__":
-    staging_data = StagingData()
-    staging_data.staging_data()
-    
-    print("Data successfully staged to the database.")

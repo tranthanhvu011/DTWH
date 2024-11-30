@@ -10,6 +10,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from sqlalchemy import select
+import pymysql
 
 # Adjust the path for db_config import
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -17,7 +18,16 @@ from db_config import DbConfig
 
 class CrawlData:
     def __init__(self):
-        # Initialize database and configurations
+        # Cấu hình cơ sở dữ liệu
+        self.db_name = "control"
+        self.db_user = "root"
+        self.db_password = ""
+        self.db_host = "localhost"
+        self.db_charset = "utf8mb4"
+
+        # Kiểm tra và tạo cơ sở dữ liệu nếu chưa tồn tại
+        self.ensure_database()
+
         self.db_config = DbConfig()
         self.engine = create_engine('mysql+pymysql://root:@localhost/group11?charset=utf8mb4', echo=True)
         self.Session = sessionmaker(bind=self.engine)
@@ -37,6 +47,23 @@ class CrawlData:
         # Register signals for graceful termination
         self._register_signals()
 
+    def ensure_database(self):
+        """Kiểm tra và tạo cơ sở dữ liệu nếu chưa tồn tại."""
+        try:
+            connection = pymysql.connect(
+                host=self.db_host,
+                user=self.db_user,
+                password=self.db_password,
+            )
+            cursor = connection.cursor()
+            cursor.execute(
+                f"CREATE DATABASE IF NOT EXISTS {self.db_name} CHARACTER SET {self.db_charset} COLLATE utf8mb4_unicode_ci;"
+            )
+            connection.close()
+            print(f"Database '{self.db_name}' ensured.")
+        except pymysql.MySQLError as e:
+            print(f"Error ensuring database: {e}")
+            raise
     def _define_tables(self):
         # Define config and logs tables
         config_table = Table('config', self.metadata,
