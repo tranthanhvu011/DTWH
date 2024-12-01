@@ -19,7 +19,7 @@ from db_config import DbConfig
 class CrawlData:
     def __init__(self):
         # Cấu hình cơ sở dữ liệu
-        self.db_name = "group11"
+        self.db_name = "control"
         self.db_user = "root"
         self.db_password = ""
         self.db_host = "localhost"
