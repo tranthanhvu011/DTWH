@@ -3,7 +3,7 @@ import os
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from crawl_data import CrawlData
+from crawl.crawl_data import CrawlData
 
 class TestCrawlData:
     def __init__(self):

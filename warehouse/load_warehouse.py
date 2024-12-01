@@ -13,10 +13,8 @@ from db_config import Control
 class LoadWarehouse:
     def __init__(self):
         self.control = Control()
-        self.control.set_process("loadToWarehouse")
         self.connect_control()
         self.connect_staging()
-        self.connect_warehouse()
         self.start_load_warehouse()
 
     def connect_control(self):
@@ -94,21 +92,15 @@ class LoadWarehouse:
             return False
 
     def write_log(self, action, details, status):
+        timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
         self.control.write_log(action, details, status)  
 
-    def get_connection_to_warehouse(self, config_id, control_session):
-        config_table = Table('config', self.metadata_control, autoload_with=self.engine_control)
-        result = control_session.query(config_table).filter(config_table.c.id == config_id).first()
-        
-        if result:
-            db_connection_string = result[6]  
-            engine_warehouse = create_engine(db_connection_string)
-            self._define_tables(engine_warehouse)
-            SessionWarehouse = sessionmaker(bind=engine_warehouse)
-            warehouse_session = SessionWarehouse() 
-            return warehouse_session 
-        else:
-            return None
+    def get_connection_to_warehouse(self):
+        engine_warehouse = create_engine(self.control.db_config.db_connection_warehouse)
+        self._define_tables(engine_warehouse)
+        SessionWarehouse = sessionmaker(bind=engine_warehouse)
+        warehouse_session = SessionWarehouse() 
+        return warehouse_session 
     
     def check_staging_data(self, conn):
         logs_table = Table('logs', self.metadata_control, autoload_with=conn)
@@ -290,7 +282,7 @@ class LoadWarehouse:
             return
 
         # Bước 5. Connect to the Warehouse database
-        data_warehouse_session = self.get_connection_to_warehouse(config_id=2, control_session=control_session)
+        data_warehouse_session = self.get_connection_to_warehouse()
 
         # Bước 6. Check if data_warehouse_session is None
         if data_warehouse_session is None:
@@ -304,7 +296,7 @@ class LoadWarehouse:
             return
 
         # Bước 8. Load data from Staging to Warehouse
-        total_product = self.insert_data_to_warehouse(conn_control=control_session.connection(), conn_warehouse=data_warehouse_session.connection())
+        total_product = self.insert_data_to_warehouse(conn_control=self.SessionStaging().connection(), conn_warehouse=data_warehouse_session.connection())
 
         # Bước 9. Insert new row into logs table  
         self.write_log(action="Load data to Warehouse", details=f"Load data from Staging to Warehouse: {total_product} products have been added.", status="Success")
@@ -312,6 +304,7 @@ class LoadWarehouse:
         # Bước 10. Close all connections to the database
         control_session.close()
         data_warehouse_session.close()
+        self.SessionStaging().close()
 
         print(f"Successfully loaded {total_product} products from Staging to Warehouse.")
 if __name__ == "__main__":

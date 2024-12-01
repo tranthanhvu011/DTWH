@@ -17,6 +17,12 @@ class DbConfig:
             self.category_url = self.config['urls']['product_url']
             self.chromedriver_path = self.config['path']['chromedriver']
             self.db_user = self.config['database']['user']
+            self.db_connection = (
+                    f"mysql+pymysql://{self.config['database']['user']}:" 
+                    f"{self.config['database']['password']}@{self.config['database']['host']}/"
+                    f"{self.config['database']['database_control']}?charset={self.config['database']['charset']}"
+)
+
 
             # Danh sách database
             self.databases = [
@@ -32,6 +38,7 @@ class DbConfig:
             )
 
             self.create_databases_if_not_exists()
+            
 
             self.db_connection_control = self.create_db_connection('database_control')
             self.db_connection_staging = self.create_db_connection('database_staging')
@@ -79,21 +86,29 @@ class DbConfig:
 
 class Control:
     def __init__(self):
-        self.db_config = DbConfig()
+        self.db_config = DbConfig()  # Kết nối đến DbConfig, nơi quản lý cấu hình kết nối
         self.engine = create_engine(self.db_config.db_connection_control, echo=True)
         self.Session = sessionmaker(bind=self.engine)
         self.metadata = MetaData()
+
+        # Định nghĩa bảng config và logs
         self.config_table, self.logs_table = self._define_tables()
+
+        # Tạo bảng nếu chưa tồn tại
         self.metadata.create_all(self.engine)
-        self.process = None
-        self.config_id = self.sync_config_with_db()
+        self.insert_config()
+        
+        # Chèn cấu hình vào bảng config nếu chưa có
+        self.config_id = self.insert_config()  # Trả về ID của config đã chèn hoặc tồn tại
+        self.process = None  # Giá trị mặc định cho process
 
     def set_process(self, process): 
         self.process = process
 
     def _define_tables(self):
+        # Định nghĩa bảng config
         config_table = Table('config', self.metadata,
-            Column('id', Integer, primary_key=True, autoincrement=True),
+            Column('id', Integer, primary_key=True),
             Column('data_dir', String(255)),
             Column('products_csv', String(255)),
             Column('specifications_csv', String(255)),
@@ -104,6 +119,7 @@ class Control:
             Column('user', String(50))
         )
 
+        # Định nghĩa bảng logs
         logs_table = Table('logs', self.metadata,
             Column('id', Integer, primary_key=True, autoincrement=True),
             Column('config_id', Integer, ForeignKey('config.id')),
@@ -115,9 +131,58 @@ class Control:
         )
 
         return config_table, logs_table
+    def get_config_data(self):
+        # Retrieve config data from the config table
+        with self.engine.connect() as conn:
+            result = conn.execute(select(self.config_table)).mappings().fetchone()
+            if result:
+                return dict(result)
+            else:
+                raise ValueError("Configuration not found in the config table.")
+    def insert_config(self):
+        try:
+            with self.engine.connect() as conn:
+                # Kiểm tra xem cấu hình đã tồn tại chưa
+                result = conn.execute(
+                    select(self.config_table.c.id).where(
+                        self.config_table.c.user == self.db_config.db_user
+                    )
+                ).mappings().fetchone()
 
-    def sync_config_with_db(self):
-        return 1  # Simplified to return 1 directly
+                if result:  # Nếu tồn tại, trả về ID của cấu hình
+                    print(f"Cấu hình đã tồn tại. ID: {result['id']}")
+                    return result['id']
+
+                # Nếu chưa tồn tại, chèn cấu hình mới
+                print(f"Cấu hình chưa tồn tại, tiến hành chèn mới cho user {self.db_config.db_user}")
+                insert_stmt = self.config_table.insert().values(
+                    data_dir=self.db_config.data_dir,
+                    products_csv=self.db_config.products_csv,
+                    specifications_csv=self.db_config.specifications_csv,
+                    images_csv=self.db_config.images_csv,
+                    category_url=self.db_config.category_url,
+                    db_connection=self.db_config.db_connection,
+                    chromedriver_path=self.db_config.chromedriver_path,
+                    user=self.db_config.db_user
+                )
+                conn.execute(insert_stmt)
+                conn.commit()  # Ghi thay đổi vào cơ sở dữ liệu
+
+                # Lấy ID của cấu hình vừa chèn
+                new_config_id = conn.execute(
+                    select(self.config_table.c.id).where(
+                        self.config_table.c.user == self.db_config.db_user
+                    )
+                ).mappings().fetchone()
+
+                if new_config_id:
+                    print(f"Đã chèn cấu hình mới. ID: {new_config_id['id']}")
+                    return new_config_id['id']
+                else:
+                    raise RuntimeError("Không thể lấy ID sau khi chèn cấu hình mới.")
+        except Exception as e:
+            print(f"Lỗi khi chèn cấu hình: {e}")
+            raise
 
     def write_log(self, action, details, status, process=None):
         timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
@@ -137,8 +202,8 @@ class Control:
     def test(self):
         print("Running tests for Control class...")
 
-        # Test sync_config_with_db
-        config_id = self.sync_config_with_db()
+        # Test insert_config
+        config_id = self.insert_config()
         if config_id:
             print(f"Config ID retrieved: {config_id}")
         else:
@@ -146,13 +211,6 @@ class Control:
 
         # Set the process to staging
         self.set_process("staging")
-
-        # Test write_log
-        try:
-            self.write_log(action="TestAction", details="This is a test log entry.", status="Success")
-            print("Log entry created successfully.")
-        except Exception as e:
-            print(f"Failed to create log entry: {e}")
 
         print("Tests completed.")
 
