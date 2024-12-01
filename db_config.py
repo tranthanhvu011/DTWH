@@ -4,51 +4,78 @@ from sqlalchemy import create_engine, Table, Column, Integer, String, Text, Meta
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy import select
-
+from sqlalchemy import create_engine, text
 
 class DbConfig:
     def __init__(self):
-        # Load configuration from config.ini
-        self.config = self.load_config()
+        try:
+            self.config = self.load_config()
+            self.data_dir = self.config['data']['data_dir']
+            self.products_csv = self.config['data']['products']
+            self.images_csv = self.config['data']['images']
+            self.specifications_csv = self.config['data']['specifications']
+            self.category_url = self.config['urls']['product_url']
+            self.chromedriver_path = self.config['path']['chromedriver']
+            self.db_user = self.config['database']['user']
 
-        # Configuration for data directory and CSV files
-        self.data_dir = self.config['data']['data_dir']
-        self.products_csv = self.config['data']['products']
-        self.images_csv = self.config['data']['images']
-        self.specifications_csv = self.config['data']['specifications']
+            # Danh sách database
+            self.databases = [
+                self.config['database']['database_control'],
+                self.config['database']['database_staging'],
+                self.config['database']['database_warehouse'],
+                self.config['database']['database_mart']
+            ]
 
-        # Configuration for URLs and paths
-        self.category_url = self.config['urls']['product_url']
-        self.chromedriver_path = self.config['path']['chromedriver']
+            self.base_db_connection = (
+                f"mysql+pymysql://{self.config['database']['user']}:" 
+                f"{self.config['database']['password']}@{self.config['database']['host']}/"
+            )
 
-        # Database connection settings
-        self.db_user = self.config['database']['user']
+            self.create_databases_if_not_exists()
 
-        # Create database connections for control and staging databases
-        self.db_connection_control = self.create_db_connection('database_control')
-        self.db_connection_staging = self.create_db_connection('database_staging')
+            self.db_connection_control = self.create_db_connection('database_control')
+            self.db_connection_staging = self.create_db_connection('database_staging')
+            self.db_connection_warehouse = self.create_db_connection('database_warehouse')
+            self.db_connection_mart = self.create_db_connection('database_mart')
+
+        except Exception as e:
+            print(f"Error initializing DbConfig: {e}")
+            raise
 
     def load_config(self):
-        """
-        Load configuration from the config.ini file.
-        :return: Config object
-        """
         config = configparser.ConfigParser()
-        config.read('config.ini')  # Read the config file
-        return config
+        try:
+            config.read('config.ini')
+            if not config.sections():
+                raise FileNotFoundError("Config file not found or is empty.")
+            return config
+        except Exception as e:
+            print(f"Error reading config file: {e}")
+            raise
+
+    def create_databases_if_not_exists(self):
+        try:
+            engine = create_engine(self.base_db_connection, echo=True)
+            with engine.connect() as conn:
+                for db_name in self.databases:
+                    # Sử dụng text() để thực thi câu lệnh SQL
+                    sql = text(f"CREATE DATABASE IF NOT EXISTS `{db_name}` CHARACTER SET {self.config['database']['charset']}")
+                    conn.execute(sql)
+                    print(f"Database `{db_name}` đã được kiểm tra và tạo nếu cần.")
+        except SQLAlchemyError as e:
+            print(f"Error creating databases: {e}")
+            raise
 
     def create_db_connection(self, db_name_key):
-        """
-        Create the database connection string based on the db_name_key from the config file.
-        :param db_name_key: Key for the database name in the config.ini (e.g., 'database_control').
-        :return: Database connection string.
-        """
-        return (
-            f"mysql+pymysql://{self.config['database']['user']}:" 
-            f"{self.config['database']['password']}@{self.config['database']['host']}/" 
-            f"{self.config['database'][db_name_key]}?charset={self.config['database']['charset']}"
-        )
-
+        try:
+            return (
+                f"mysql+pymysql://{self.config['database']['user']}:" 
+                f"{self.config['database']['password']}@{self.config['database']['host']}/" 
+                f"{self.config['database'][db_name_key]}?charset={self.config['database']['charset']}"
+            )
+        except KeyError as e:
+            print(f"Missing configuration for {db_name_key}: {e}")
+            raise
 
 class Control:
     def __init__(self):
@@ -58,11 +85,13 @@ class Control:
         self.metadata = MetaData()
         self.config_table, self.logs_table = self._define_tables()
         self.metadata.create_all(self.engine)
+        self.process = None
+        self.config_id = self.sync_config_with_db()
+
+    def set_process(self, process): 
+        self.process = process
 
     def _define_tables(self):
-        """
-        Define the tables for config and logs.
-        """
         config_table = Table('config', self.metadata,
             Column('id', Integer, primary_key=True, autoincrement=True),
             Column('data_dir', String(255)),
@@ -87,44 +116,17 @@ class Control:
 
         return config_table, logs_table
 
-    def load_config(self):
-        """
-        Load configuration from the database.
-        :return: Config record
-        """
-        with self.engine.begin() as conn:
-            result = conn.execute(select(self.config_table).limit(1)).fetchone()
-            return result
+    def sync_config_with_db(self):
+        return 1  # Simplified to return 1 directly
 
-    def insert_config(self, config_data):
-        """
-        Insert configuration into the config table.
-        :param config_data: Dictionary containing configuration values.
-        :return: Inserted ID.
-        """
-        try:
-            with self.engine.begin() as conn:
-                result = conn.execute(self.config_table.insert().values(config_data))
-                return result.inserted_primary_key[0]
-        except SQLAlchemyError as e:
-            print(f"Error inserting config: {e}")
-            return None
-
-    def write_log(self, action, details, status, config_id=None, process='control'):
-        """
-        Write a log entry into the logs table.
-        :param action: Action performed (e.g., 'Insert', 'Update').
-        :param details: Description of the action.
-        :param status: Status of the action (e.g., 'Completed', 'Failed').
-        :param config_id: Config ID (if applicable).
-        :param process: Process name (e.g., 'control').
-        """
+    def write_log(self, action, details, status, process=None):
         timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
-        config_id = config_id if config_id else 1  # Default to 1 if no config_id is provided
+        if process is None:
+            process = self.process
 
         with self.engine.begin() as conn:
             conn.execute(self.logs_table.insert().values(
-                config_id=config_id,
+                config_id=self.config_id,
                 timestamp=timestamp,
                 action=action,
                 details=details,
@@ -132,30 +134,29 @@ class Control:
                 status=status
             ))
 
-    def get_config_id(self, user):
-        """
-        Get the config ID for a specific user.
-        :param user: User for whom the config is being retrieved.
-        :return: Config ID.
-        """
-        with self.engine.begin() as conn:
-            result = conn.execute(
-                select(self.config_table.c.id)
-                .where(self.config_table.c.user == user)
-            ).fetchone()
-            return result['id'] if result else None
+    def test(self):
+        print("Running tests for Control class...")
 
-    def check_process_in_log(self, process_name, status):
-        """
-        Check if a specific process has a log entry with the given status.
-        :param process_name: The process name to check (e.g., 'control').
-        :param status: The status to check (e.g., 'Completed').
-        :return: List of logs matching the criteria.
-        """
-        with self.engine.begin() as conn:
-            result = conn.execute(
-                select(self.logs_table)
-                .where(self.logs_table.c.process == process_name)
-                .where(self.logs_table.c.status == status)
-            ).fetchall()
-            return result
+        # Test sync_config_with_db
+        config_id = self.sync_config_with_db()
+        if config_id:
+            print(f"Config ID retrieved: {config_id}")
+        else:
+            print("Failed to retrieve Config ID")
+
+        # Set the process to staging
+        self.set_process("staging")
+
+        # Test write_log
+        try:
+            self.write_log(action="TestAction", details="This is a test log entry.", status="Success")
+            print("Log entry created successfully.")
+        except Exception as e:
+            print(f"Failed to create log entry: {e}")
+
+        print("Tests completed.")
+
+# Example usage
+if __name__ == "__main__":
+    control = Control()
+    control.test()

@@ -15,7 +15,9 @@ from db_config import Control
 class StagingData:
     def __init__(self):
         self.control = Control()
+        self.control.set_process("staging")
         self.db_config = self.control.db_config
+        
         self.engine_staging = create_engine(self.db_config.db_connection_staging, echo=True)
         self.Session = sessionmaker(bind=self.engine_staging)
         self.metadata = MetaData()
@@ -225,7 +227,6 @@ class StagingData:
             return 'inserted' if result.inserted_primary_key else None
 
     def write_log(self, action, details, status):
-        timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
         self.control.write_log(action, details, status)  
 
     @staticmethod
