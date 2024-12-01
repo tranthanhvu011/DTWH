@@ -13,6 +13,7 @@ from db_config import Control
 class LoadWarehouse:
     def __init__(self):
         self.control = Control()
+        self.control.set_process("loadToWarehouse")
         self.connect_control()
         self.connect_staging()
         self.connect_warehouse()
@@ -93,7 +94,6 @@ class LoadWarehouse:
             return False
 
     def write_log(self, action, details, status):
-        timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
         self.control.write_log(action, details, status)  
 
     def get_connection_to_warehouse(self, config_id, control_session):
