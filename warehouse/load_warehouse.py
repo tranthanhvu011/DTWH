@@ -13,8 +13,6 @@ from db_config import Control
 class LoadWarehouse:
     def __init__(self):
         self.control = Control()
-        self.connect_control()
-        self.connect_staging()
         self.start_load_warehouse()
 
     def connect_control(self):
@@ -212,10 +210,12 @@ class LoadWarehouse:
                 specifications_table.c.product_id == product[0]
             )
             specifications_data = conn_control.execute(stmt_specifications).fetchall()
-
+            # Bước 9.1. Check the data exists.
             if existing_products:
+                # Bước 9.3. Check product has changed price
                 if product[2] != existing_products[0][2]:
                     product_id = existing_products[0][0]
+                    # Bước 9.4 Insert data to Warehouse with sk increase 1
                     sk = existing_products[0][2] + 1
                     insert_stmt = warehouse_products_table.insert().values(
                         id=product_id,
@@ -229,6 +229,7 @@ class LoadWarehouse:
                     )
                     conn_warehouse.execute(insert_stmt)
             else:
+                # Bước 9.2 Insert data to Warehouse
                 insert_stmt = warehouse_products_table.insert().values(
                     product_name= product[1],
                     price=product[2],
@@ -281,30 +282,35 @@ class LoadWarehouse:
             self.write_log(action="Load data to Warehouse", details="Data has already been loaded from Staging to Warehouse", status="Info")
             return
 
-        # Bước 5. Connect to the Warehouse database
+        # Bước 5. Connect to the Staging database
+        self.connect_staging()
+        staging_session = self.SessionStaging()
+
+        # Bước 6. Check the connection to database Staging
+        if staging_session is None:
+            # Bước 6.1. Insert new row into logs table.
+            self.write_log(action="Load data to Warehouse", details="Failed to get Staging connection", status="Error")
+            return
+        
+        # Bước 7. Connect database Warehouse
         data_warehouse_session = self.get_connection_to_warehouse()
 
-        # Bước 6. Check if data_warehouse_session is None
-        if data_warehouse_session is None:
-            self.write_log(action="Load data to Warehouse", details="Failed to get Warehouse connection", status="Error")
-            return
-
-        # Bước 7. Check the connection to the Warehouse database
+        # Bước 8. Check the connection to the Warehouse database
         if not self.check_connect(data_warehouse_session):
             # Bước 7.1. Insert new row into logs table.
             self.write_log(action="Load data to Warehouse", details="Failed to connect to Warehouse", status="Error")
             return
 
-        # Bước 8. Load data from Staging to Warehouse
-        total_product = self.insert_data_to_warehouse(conn_control=self.SessionStaging().connection(), conn_warehouse=data_warehouse_session.connection())
+        # Bước 9. Load data from Staging to Warehouse
+        total_product = self.insert_data_to_warehouse(conn_control=staging_session.connection(), conn_warehouse=data_warehouse_session.connection())
 
-        # Bước 9. Insert new row into logs table  
+        # Bước 10. Insert new row into logs table  
         self.write_log(action="Load data to Warehouse", details=f"Load data from Staging to Warehouse: {total_product} products have been added.", status="Success")
 
-        # Bước 10. Close all connections to the database
+        # Bước 11. Close all connections to the database
         control_session.close()
         data_warehouse_session.close()
-        self.SessionStaging().close()
+        staging_session.close()
 
         print(f"Successfully loaded {total_product} products from Staging to Warehouse.")
 if __name__ == "__main__":
