@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/DTWH-ALL.iml" filepath="$PROJECT_DIR$/.idea/DTWH-ALL.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/PythonHTML.iml" filepath="$PROJECT_DIR$/.idea/PythonHTML.iml" />
     </modules>
   </component>
 </project>
