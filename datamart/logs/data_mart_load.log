@@ -1,0 +1,2 @@
+2024-12-01 12:46:10,158 - INFO - Starting Data Mart loading process
+2024-12-01 12:46:10,161 - ERROR - Failed to connect to Data Warehouse: Config file not found at /mnt/c/Users/ADMIN/Desktop/DW/DTWH/config.example.ini
